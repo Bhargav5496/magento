@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config>
+	<modules>
+		<Ccc_Product>
+			<version>0.1.0</version>
+		</Ccc_Product>
+	</modules>
+	<frontend>
+        <routers>
+            <Ccc_Product_SomeFreeRouterName1>
+                <use>standard</use>
+                <args>
+                    <module>Ccc_Product</module>
+                    <frontName>Ccc-Product</frontName>
+                </args>
+            </Ccc_Product_SomeFreeRouterName1>
+        </routers>
+    </frontend>   
+</config>
