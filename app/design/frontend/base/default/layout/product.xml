@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+    <product_index_test>
+        <reference name="content">
+            <block type="ccc/template" name="product_grid" template="product/grid.phtml" />
+        </reference>
+    </product_index_test>
+</layout>
