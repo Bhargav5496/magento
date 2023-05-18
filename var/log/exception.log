@@ -291,3 +291,93 @@ Stack trace:
 #7 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
 #8 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
 #9 {main}
+2023-05-17T05:00:15+00:00 ERR (3): 
+Mage_Core_Exception: Invalid block type: Ccc_Eav_Block_Adminhtml_Eav in C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php:598
+Stack trace:
+#0 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(495): Mage::throwException('Invalid block t...')
+#1 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(437): Mage_Core_Model_Layout->_getBlockInstance('Ccc_Eav_Block_A...', Array)
+#2 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Ccc\Eav\controllers\AdminHtml\EavController.php(20): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...')
+#3 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Action.php(418): Ccc_Eav_Adminhtml_EavController->indexAction()
+#4 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#5 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#6 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(381): Mage_Core_Controller_Varien_Front->dispatch()
+#7 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#8 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
+#9 {main}
+2023-05-17T05:02:53+00:00 ERR (3): 
+Mage_Core_Exception: Invalid block type: Ccc_Eav_Block_Adminhtml_Eav_Grid in C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php:598
+Stack trace:
+#0 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(495): Mage::throwException('Invalid block t...')
+#1 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(437): Mage_Core_Model_Layout->_getBlockInstance('Ccc_Eav_Block_A...', Array)
+#2 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Adminhtml\Block\Widget\Grid\Container.php(66): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...', 'adminhtml_eav.g...')
+#3 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Block\Abstract.php(297): Mage_Adminhtml_Block_Widget_Grid_Container->_prepareLayout()
+#4 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(456): Mage_Core_Block_Abstract->setLayout(Object(Mage_Core_Model_Layout))
+#5 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Ccc\Eav\controllers\AdminHtml\EavController.php(20): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...')
+#6 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Action.php(418): Ccc_Eav_Adminhtml_EavController->indexAction()
+#7 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#8 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#9 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(381): Mage_Core_Controller_Varien_Front->dispatch()
+#10 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#11 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
+#12 {main}
+2023-05-17T05:06:21+00:00 ERR (3): 
+Mage_Core_Exception: Invalid block type: Ccc_Eav_Block_Adminhtml_Eav_Grid in C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php:598
+Stack trace:
+#0 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(495): Mage::throwException('Invalid block t...')
+#1 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(437): Mage_Core_Model_Layout->_getBlockInstance('Ccc_Eav_Block_A...', Array)
+#2 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Adminhtml\Block\Widget\Grid\Container.php(66): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...', 'adminhtml_eav.g...')
+#3 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Block\Abstract.php(297): Mage_Adminhtml_Block_Widget_Grid_Container->_prepareLayout()
+#4 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(456): Mage_Core_Block_Abstract->setLayout(Object(Mage_Core_Model_Layout))
+#5 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Ccc\Eav\controllers\AdminHtml\EavController.php(22): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...')
+#6 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Action.php(418): Ccc_Eav_Adminhtml_EavController->indexAction()
+#7 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#8 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#9 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(381): Mage_Core_Controller_Varien_Front->dispatch()
+#10 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#11 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
+#12 {main}
+2023-05-17T05:06:34+00:00 ERR (3): 
+Mage_Core_Exception: Invalid block type: Ccc_Eav_Block_Adminhtml_Eav_Grid in C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php:598
+Stack trace:
+#0 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(495): Mage::throwException('Invalid block t...')
+#1 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(437): Mage_Core_Model_Layout->_getBlockInstance('Ccc_Eav_Block_A...', Array)
+#2 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Adminhtml\Block\Widget\Grid\Container.php(66): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...', 'adminhtml_eav.g...')
+#3 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Block\Abstract.php(297): Mage_Adminhtml_Block_Widget_Grid_Container->_prepareLayout()
+#4 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(456): Mage_Core_Block_Abstract->setLayout(Object(Mage_Core_Model_Layout))
+#5 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Ccc\Eav\controllers\AdminHtml\EavController.php(22): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...')
+#6 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Action.php(418): Ccc_Eav_Adminhtml_EavController->indexAction()
+#7 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#8 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#9 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(381): Mage_Core_Controller_Varien_Front->dispatch()
+#10 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#11 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
+#12 {main}
+2023-05-17T05:06:35+00:00 ERR (3): 
+Mage_Core_Exception: Invalid block type: Ccc_Eav_Block_Adminhtml_Eav_Grid in C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php:598
+Stack trace:
+#0 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(495): Mage::throwException('Invalid block t...')
+#1 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(437): Mage_Core_Model_Layout->_getBlockInstance('Ccc_Eav_Block_A...', Array)
+#2 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Adminhtml\Block\Widget\Grid\Container.php(66): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...', 'adminhtml_eav.g...')
+#3 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Block\Abstract.php(297): Mage_Adminhtml_Block_Widget_Grid_Container->_prepareLayout()
+#4 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(456): Mage_Core_Block_Abstract->setLayout(Object(Mage_Core_Model_Layout))
+#5 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Ccc\Eav\controllers\AdminHtml\EavController.php(22): Mage_Core_Model_Layout->createBlock('eav/adminhtml_e...')
+#6 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Action.php(418): Ccc_Eav_Adminhtml_EavController->indexAction()
+#7 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#8 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#9 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(381): Mage_Core_Controller_Varien_Front->dispatch()
+#10 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#11 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
+#12 {main}
+2023-05-17T05:25:44+00:00 ERR (3): 
+Mage_Core_Exception: Invalid block type: Ccc_Demo_Block_Adminhtml_Demo in C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php:598
+Stack trace:
+#0 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(495): Mage::throwException('Invalid block t...')
+#1 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\Layout.php(437): Mage_Core_Model_Layout->_getBlockInstance('Ccc_Demo_Block_...', Array)
+#2 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Ccc\Demo\controllers\AdminHtml\DemoController.php(22): Mage_Core_Model_Layout->createBlock('demo/adminhtml_...')
+#3 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Action.php(418): Ccc_Demo_Adminhtml_DemoController->indexAction()
+#4 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('index')
+#5 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#6 C:\xampp\htdocs\2023\magento\magento-mirror\app\code\core\Mage\Core\Model\App.php(381): Mage_Core_Controller_Varien_Front->dispatch()
+#7 C:\xampp\htdocs\2023\magento\magento-mirror\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#8 C:\xampp\htdocs\2023\magento\magento-mirror\index.php(83): Mage::run('', 'store')
+#9 {main}
