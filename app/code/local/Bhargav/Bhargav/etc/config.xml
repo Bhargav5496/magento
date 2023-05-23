@@ -5,7 +5,7 @@
         </Bhargav_Bhargav>
     </modules>
     <frontend>
-        <routers>
+        <!-- <routers>
             <bhargav>
                 <use>standard</use>
                 <args>
@@ -13,7 +13,7 @@
                     <frontName>bhargav</frontName>
                 </args>
             </bhargav>
-        </routers>
+        </routers> -->
         <layout>
             <updates>
                 <bhargav>
@@ -112,6 +112,15 @@
     </global>
     <admin>
         <routers>
+            <bhargav>
+                <use>admin</use>
+                <args>
+                    <module>Bhargav_Bhargav</module>
+                    <frontName>bhargav</frontName>
+                </args>
+            </bhargav>
+        </routers>
+        <!-- <routers>
             <adminhtml>
                 <args>
                     <modules>
@@ -119,7 +128,7 @@
                     </modules>
                 </args>
             </adminhtml>
-        </routers>
+        </routers> -->
   </admin>
   
 </config>

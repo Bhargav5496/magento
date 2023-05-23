@@ -7,7 +7,7 @@
             <children>
                 <manage translate="title" module="bhargav">
                     <title>Manage Bhargav</title>
-                    <action>adminhtml/bhargav/index</action>
+                    <action>bhargav/adminhtml_bhargav/</action>
                     <sort_order>0</sort_order>
                 </manage>
                 <manageattributes translate="title" module="bhargav">
@@ -15,11 +15,11 @@
                     <children>
                         <attributes translate="title" module="bhargav">
                             <title>Manage Attributes</title>
-                            <action>adminhtml/bhargav_attribute/index</action>
+                            <action>bhargav/adminhtml_bhargav_attribute/</action>
                         </attributes>
                         <sets translate="title" module="bhargav">
                             <title>Manage Attribute Sets</title>
-                            <action>adminhtml/bhargav_set/index</action>
+                            <action>bhargav/adminhtml_bhargav_set/</action>
                         </sets>
                     </children>
                     <sort_order>20</sort_order>
