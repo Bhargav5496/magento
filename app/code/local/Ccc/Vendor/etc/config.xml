@@ -23,26 +23,17 @@
         </layout>
     </frontend>
     <global>
-        <resources>
-            <vendor_setup>
-                <setup>
-                    <module>Ccc_Vendor</module>
-                </setup>
-                <connection>
-                    <use>core_setup</use>
-                </connection>
-            </vendor_setup>
-            <vendor_write>
-                <connection>
-                    <use>core_write</use>
-                </connection>
-            </vendor_write>
-            <vendor_read>
-                <connection>
-                    <use>core_read</use>
-                </connection>
-            </vendor_read>
-        </resources>
+        <events>
+            <vendor_save>
+                <observers>
+                    <vendor_observer>
+                        <type>singleton</type>
+                        <class>Ccc_Vendor_Model_Observer</class>
+                        <method>saveVendorObserver</method>
+                    </vendor_observer>
+                </observers>
+          </vendor_save>
+        </events>
         <resources>
             <vendor_setup>
                 <setup>
@@ -80,46 +71,40 @@
                 </entities>
             </vendor_resource>
         </models>
-        <!-- <resources>
-             <vendor_setup>
-                 <setup>
-                    <module>Ccc_Vendor</module>
-                 </setup>
-             </vendor_setup>
-        </resources> 
-        <vendor_write>
-            <connection>
-                <use>core_write</use>
-            </connection>
-        </vendor_write>
-
-        <vendor_read>
-            <connection>
-                <use>core_read</use>
-            </connection>
-        </vendor_read> -->
         <blocks>
             <vendor>
                 <class>Ccc_Vendor_Block</class>
+                <rewrite>
+                    <adminhtml_vendor>Ccc_Product_Block_Adminhtml_Product</adminhtml_vendor>
+                </rewrite>
             </vendor>
+            <!-- <adminhtml>
+                <rewrite>
+                    <catalog_product_grid>Ccc_Vendor_Block_Adminhtml_Vendor_Grid</catalog_product_grid>
+                </rewrite>
+            </adminhtml> -->
         </blocks>
+
         <helpers>
             <vendor>
                 <class>Ccc_Vendor_Helper</class>
             </vendor>
+            <vendor>
+                <rewrite>
+                    <data>Ccc_Vendor_Helper_NewData</data>
+                </rewrite>
+            </vendor>
         </helpers>
-        
     </global>
     <admin>
         <routers>
-            <adminhtml>
+            <vendor>
+                <use>admin</use>
                 <args>
-                    <modules>
-                        <ccc_vendor before="Mage_Adminhtml">Ccc_Vendor_Adminhtml</ccc_vendor>
-                    </modules>
+                    <module>Ccc_Vendor</module>
+                    <frontName>abc</frontName>
                 </args>
-            </adminhtml>
+            </vendor>
         </routers>
-  </admin>
-  
+    </admin> 
 </config>

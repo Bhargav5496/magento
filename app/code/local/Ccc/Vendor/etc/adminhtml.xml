@@ -7,7 +7,7 @@
             <children>
                 <manage translate="title" module="vendor">
                     <title>Manage Vendors</title>
-                    <action>adminhtml/vendor/index</action>
+                    <action>vendor/adminhtml_vendor/index</action>
                     <sort_order>0</sort_order>
                 </manage>
             </children>

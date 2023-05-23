@@ -15,15 +15,10 @@ class Ccc_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Ac
 
     public function indexAction()
     {
-        // echo '<pre>';
-        // $model = Mage::getModel('vendor/vendor')->load(2);
-        // $model->name = 'vijay thakor';
-        // $model->email = 'v@gmial.com';
-        // $model->save();
-        // print_r($model->getCollection()->toArray());
-        // die();
+        
         $this->loadLayout();
         $this->_title($this->__("vendor Grid"));
+        $this->_setActiveMenu('vendor/manage');
         $this->_addContent($this->getLayout()->createBlock('vendor/adminhtml_vendor'));
         $this->renderLayout();
     }
@@ -81,6 +76,8 @@ class Ccc_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Ac
             $addressModel = Mage::getModel('vendor/vendor_address');
             $model->setData($vendor)->setId($this->getRequest()->getParam('id'));
             
+            Mage::dispatchEvent('vendor_save', array('model' => $model, 'request' => $this->getRequest()));
+
 
             $addressModel->setData($address);
             try {
