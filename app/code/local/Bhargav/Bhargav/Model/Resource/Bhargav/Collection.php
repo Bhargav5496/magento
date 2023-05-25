@@ -1,8 +1,9 @@
 <?php
-class Bhargav_Bhargav_Model_Resource_Bhargav_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
+class Bhargav_Bhargav_Model_Resource_Bhargav_Collection extends Mage_Catalog_Model_Resource_Collection_Abstract
 {
-    protected function _construct()
-    {  
-        $this->_init('bhargav/bhargav');
-    }  
+	public function __construct()
+	{
+		$this->setEntity('bhargav');
+		parent::__construct();	
+	}
 }

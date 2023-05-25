@@ -1,37 +1,69 @@
-<?php
+<?php 
+
 class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminhtml_Controller_Action
 {
-    public function preDispatch()
+	protected $_entityTypeId;
+
+    const XML_PATH_ALLOWED_TAGS = 'system/catalog/frontend/allowed_html_tags_list';
+
+    protected function _isAllowed()
     {
-        $this->_setForcedFormKeyActions('delete');
-        parent::preDispatch();
-        $this->_entityTypeId = Mage::getModel('eav/entity')->setType(Mage_Catalog_Model_Product::ENTITY)->getTypeId();
+        return Mage::getSingleton('admin/session')->isAllowed('bhargav/session');
+    }
     
+    protected function _getAllowedTags()
+    {
+        return explode(',', Mage::getStoreConfig(self::XML_PATH_ALLOWED_TAGS));
     }
 
-    public function indexAction()
+	public function preDispatch()
     {
-        $this->_title($this->__('Manage Attributes'));
-        $this->loadLayout();
-        $this->_addContent($this->getLayout()->createBlock('bhargav/adminhtml_attribute'));
-        $this->renderLayout();
+        parent::preDispatch();
+        $this->_entityTypeId = Mage::getModel('eav/entity')->setType(Bhargav_Bhargav_Model_Resource_Bhargav::ENTITY)->getTypeId();
     }
 
-    public function newAction()
+	protected function _initAction()
     {
-        $this->_forward('edit');
+        $this->_title($this->__('Bhargav'))
+             ->_title($this->__('Attributes'))
+             ->_title($this->__('Manage Attributes'));
+
+        if($this->getRequest()->getParam('popup')) {
+            $this->loadLayout('popup');
+        } else {
+            $this->loadLayout()
+                ->_setActiveMenu('attribute')
+                ->_addBreadcrumb(Mage::helper('bhargav')->__('Bhargav'), Mage::helper('bhargav')->__('Bhargav'))
+                ->_addBreadcrumb(
+                    Mage::helper('bhargav')->__('Manage Attributes'),
+                    Mage::helper('bhargav')->__('Manage Attributes'))
+            ;
+        }
+        return $this;
     }
 
-    public function editAction()
-    {
+	public function indexAction(){
+		$this->loadLayout();
+		$this->_setActiveMenu('bhargav');		
+		$this->_addContent($this->getLayout()->createBlock('bhargav/adminhtml_bhargav_attribute'));
+		$this->renderLayout();
+	}
+
+	public function newAction(){
+		$this->_forward('edit');
+	}
+
+	public function editAction()
+    {	
         $id = $this->getRequest()->getParam('attribute_id');
+
         $model = Mage::getModel('bhargav/resource_eav_attribute')
             ->setEntityTypeId($this->_entityTypeId);
         if ($id) {
             $model->load($id);
 
             if (!$model->getId()) {
-                Mage::getSingleton('adminhtml/session')->addError(
+                Mage::getSingleton('bhargav/session')->addError(
                     Mage::helper('bhargav')->__('This attribute no longer exists'));
                 $this->_redirect('*/*/');
                 return;
@@ -39,15 +71,14 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
 
             // entity type check
             if ($model->getEntityTypeId() != $this->_entityTypeId) {
-                Mage::getSingleton('adminhtml/session')->addError(
+                Mage::getSingleton('bhargav/session')->addError(
                     Mage::helper('bhargav')->__('This attribute cannot be edited.'));
                 $this->_redirect('*/*/');
                 return;
             }
         }
+        $data = Mage::getSingleton('bhargav/session')->getAttributeData(true);
 
-        // set entered data if was error when we do save
-        $data = Mage::getSingleton('adminhtml/session')->getAttributeData(true);
         if (! empty($data)) {
             $model->addData($data);
         }
@@ -58,54 +89,77 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
 
         $this->_title($id ? $model->getName() : $this->__('New Attribute'));
 
-        $item = $id ? Mage::helper('bhargav')->__('Edit Product Attribute')
-                    : Mage::helper('bhargav')->__('New Product Attribute');
+        $item = $id ? Mage::helper('bhargav')->__('Edit bhargav Attribute')
+                    : Mage::helper('bhargav')->__('New bhargav Attribute');
 
         $this->_addBreadcrumb($item, $item);
 
-        $this->_addContent($this->getLayout()->createBlock('bhargav/adminhtml_attribute_edit'))
-            ->_addLeft($this->getLayout()->createBlock('bhargav/adminhtml_attribute_edit_tabs'));
-
-        // $this->getLayout()->getBlock('attribute_edit_js')
-        //     ->setIsPopup((bool)$this->getRequest()->getParam('popup'));
-
+        $this->_setActiveMenu('bhargav');
+        
         $this->renderLayout();
 
     }
 
-    protected function _initAction()
+    public function validateAction()
     {
-        $this->_title($this->__('Bhargav'))
-             ->_title($this->__('Attributes'))
-             ->_title($this->__('Manage Attributes'));
+        $response = new Varien_Object();
+        $response->setError(false);
 
-        if($this->getRequest()->getParam('popup')) {
-            $this->loadLayout('popup');
-        } else {
-            $this->loadLayout()
-                ->_setActiveMenu('bhargav/attributes')
-                ->_addBreadcrumb(Mage::helper('bhargav')->__('Bhargav'), Mage::helper('bhargav')->__('Bhargav'))
-                ->_addBreadcrumb(
-                    Mage::helper('bhargav')->__('Manage Attributes'),
-                    Mage::helper('bhargav')->__('Manage Attributes'))
-            ;
+        $attributeCode  = $this->getRequest()->getParam('attribute_code');
+        $attributeId    = $this->getRequest()->getParam('attribute_id');
+        $attribute = Mage::getModel('bhargav/resource_eav_attribute')
+            ->loadByCode($this->_entityTypeId, $attributeCode);
+
+        if ($attribute->getId() && !$attributeId) {
+            Mage::getSingleton('bhargav/session')->addError(
+                Mage::helper('bhargav')->__('Attribute with the same code already exists'));
+            $this->_initLayoutMessages('bhargav/session');
+            $response->setError(true);
+            $response->setMessage($this->getLayout()->getMessagesBlock()->getGroupedHtml());
         }
-        return $this;
+
+        $this->getResponse()->setBody($response->toJson());
+    }
+
+    protected function _filterPostData($data)
+    {
+        if ($data) {
+         
+            $helperCatalog = Mage::helper('bhargav');
+
+            $data['frontend_label'] = (array) $data['frontend_label'];
+            foreach ($data['frontend_label'] as & $value) {
+                if ($value) {
+                    $value = $helperCatalog->stripTags($value);
+                }
+            }
+
+            if (!empty($data['option']) && !empty($data['option']['value']) && is_array($data['option']['value'])) {
+                $allowableTags = isset($data['is_html_allowed_on_front']) && $data['is_html_allowed_on_front']
+                    ? sprintf('<%s>', implode('><', $this->_getAllowedTags())) : null;
+                foreach ($data['option']['value'] as $key => $values) {
+                    foreach ($values as $storeId => $storeLabel) {
+                        $data['option']['value'][$key][$storeId]
+                            = $helperCatalog->stripTags($storeLabel, $allowableTags);
+                    }
+                }
+            }
+        }
+        return $data;
     }
 
     public function saveAction()
-    {
-        echo 123; die;
+    {   
         $data = $this->getRequest()->getPost();
         if ($data) {
-            /** @var $session Mage_Admin_Model_Session */
-            $session = Mage::getSingleton('adminhtml/session');
+           
+            $session = Mage::getSingleton('bhargav/session');
 
             $redirectBack   = $this->getRequest()->getParam('back', false);
-            /* @var $model Mage_Catalog_Model_Entity_Attribute */
-            $model = Mage::getModel('catalog/resource_eav_attribute');
-            /* @var $helper Mage_Catalog_Helper_Product */
-            $helper = Mage::helper('catalog/product');
+      
+            $model = Mage::getModel('bhargav/resource_eav_attribute');
+     
+            $helper = Mage::helper('bhargav/bhargav');
 
             $id = $this->getRequest()->getParam('attribute_id');
 
@@ -114,13 +168,12 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
                 $validatorAttrCode = new Zend_Validate_Regex(array('pattern' => '/^(?!event$)[a-z][a-z_0-9]{1,254}$/'));
                 if (!$validatorAttrCode->isValid($data['attribute_code'])) {
                     $session->addError(
-                        Mage::helper('catalog')->__('Attribute code is invalid. Please use only letters (a-z), numbers (0-9) or underscore(_) in this field, first character should be a letter. Do not use "event" for an attribute code.')
+                        Mage::helper('bhargav')->__('Attribute code is invalid. Please use only letters (a-z), numbers (0-9) or underscore(_) in this field, first character should be a letter. Do not use "event" for an attribute code.')
                     );
                     $this->_redirect('*/*/edit', array('attribute_id' => $id, '_current' => true));
                     return;
                 }
             }
-
 
             //validate frontend_input
             if (isset($data['frontend_input'])) {
@@ -140,7 +193,7 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
 
                 if (!$model->getId()) {
                     $session->addError(
-                        Mage::helper('catalog')->__('This Attribute no longer exists'));
+                        Mage::helper('bhargav')->__('This Attribute no longer exists'));
                     $this->_redirect('*/*/');
                     return;
                 }
@@ -148,13 +201,13 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
                 // entity type check
                 if ($model->getEntityTypeId() != $this->_entityTypeId) {
                     $session->addError(
-                        Mage::helper('catalog')->__('This attribute cannot be updated.'));
+                        Mage::helper('bhargav')->__('This attribute cannot be updated.'));
                     $session->setAttributeData($data);
                     $this->_redirect('*/*/');
                     return;
                 }
 
-                $data['backend_model'] = $model->getBackendModel();
+                /*$data['backend_model'] = $model->getBackendModel();*/
                 $data['attribute_code'] = $model->getAttributeCode();
                 $data['is_user_defined'] = $model->getIsUserDefined();
                 $data['frontend_input'] = $model->getFrontendInput();
@@ -198,7 +251,6 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
                 $model->setIsUserDefined(1);
             }
 
-
             if ($this->getRequest()->getParam('set') && $this->getRequest()->getParam('group')) {
                 // For creating product attribute on product page we need specify attribute set and group
                 $model->setAttributeSetId($this->getRequest()->getParam('set'));
@@ -208,24 +260,13 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
             try {
                 $model->save();
                 $session->addSuccess(
-                    Mage::helper('catalog')->__('The product attribute has been saved.'));
+                    Mage::helper('bhargav')->__('The bhargav attribute has been saved.'));
 
-                /**
-                 * Clear translation cache because attribute labels are stored in translation
-                 */
                 Mage::app()->cleanCache(array(Mage_Core_Model_Translate::CACHE_TAG));
                 $session->setAttributeData(false);
-                if ($this->getRequest()->getParam('popup')) {
-                    $this->_redirect('adminhtml/catalog_product/addAttribute', array(
-                        'id'       => $this->getRequest()->getParam('product'),
-                        'attribute'=> $model->getId(),
-                        '_current' => true
-                    ));
-                } elseif ($redirectBack) {
-                    $this->_redirect('*/*/edit', array('attribute_id' => $model->getId(),'_current'=>true));
-                } else {
-                    $this->_redirect('*/*/', array());
-                }
+              
+                $this->_redirect('*/*/', array());
+               
                 return;
             } catch (Exception $e) {
                 $session->addError($e->getMessage());
@@ -234,6 +275,38 @@ class Bhargav_Bhargav_Adminhtml_Bhargav_AttributeController extends Mage_Adminht
                 return;
             }
         }
+        $this->_redirect('*/*/');
+    }
+
+     public function deleteAction()
+    {
+        if ($id = $this->getRequest()->getParam('attribute_id')) {
+            $model = Mage::getModel('bhargav/resource_eav_attribute');
+
+            // entity type check
+            $model->load($id);
+            if ($model->getEntityTypeId() != $this->_entityTypeId || !$model->getIsUserDefined()) {
+                Mage::getSingleton('bhargav/session')->addError(
+                    Mage::helper('bhargav')->__('This attribute cannot be deleted.'));
+                $this->_redirect('*/*/');
+                return;
+            }
+
+            try {
+                $model->delete();
+                Mage::getSingleton('bhargav/session')->addSuccess(
+                    Mage::helper('bhargav')->__('The bhargav attribute has been deleted.'));
+                $this->_redirect('*/*/');
+                return;
+            }
+            catch (Exception $e) {
+                Mage::getSingleton('bhargav/session')->addError($e->getMessage());
+                $this->_redirect('*/*/edit', array('attribute_id' => $this->getRequest()->getParam('attribute_id')));
+                return;
+            }
+        }
+        Mage::getSingleton('bhargav/session')->addError(
+            Mage::helper('bhargav')->__('Unable to find an attribute to delete.'));
         $this->_redirect('*/*/');
     }
 }
