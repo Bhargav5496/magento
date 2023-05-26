@@ -269,6 +269,9 @@ class Mage_Adminhtml_Catalog_CategoryController extends Mage_Adminhtml_Controlle
         $storeId = $this->getRequest()->getParam('store');
         $refreshTree = 'false';
         if ($data = $this->getRequest()->getPost()) {
+            // echo "<pre>";
+            // print_r($data);
+            // die;
             if (isset($data['general']['path'])) {
                 unset($data['general']['path']);
             }
