@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <Bhargav_Bhargav>
+        <Bhargav_Eavmgmt>
             <active>true</active>
             <codePool>local</codePool>
-        </Bhargav_Bhargav>
+        </Bhargav_Eavmgmt>
     </modules>
 </config>

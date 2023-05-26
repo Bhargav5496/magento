@@ -21,6 +21,7 @@ ALTER TABLE `brand`
   ADD PRIMARY KEY (`brand_id`);
 
 
+
 ALTER TABLE `brand`
   MODIFY `brand_id` int(11) NOT NULL AUTO_INCREMENT;
 
