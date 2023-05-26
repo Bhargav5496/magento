@@ -1,0 +1,45 @@
+<config>
+    <modules>
+        <Ccc_P>
+            <version>1.0.0.0</version>                
+        </Ccc_P>
+    </modules>
+    <global>
+        <models>
+            <product>
+                <class>Ccc_Product_Model</class>
+                <resourceModel>product_resource</resourceModel>
+            </product>
+            <product_resource>
+                <class>Ccc_Product_Model_Resource</class>
+                <entities>
+                    <product>
+                        <table>product</table>
+                    </product>
+                </entities>
+            </product_resource>
+        </models> 
+        <blocks>
+            <product>
+                <class>Ccc_Product_Block</class>
+            </product>
+        </blocks>
+        <helpers>
+            <product>
+                <class>Ccc_Product_Helper</class>
+            </product>
+        </helpers>
+        
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <ccc_product before="Mage_Adminhtml">Ccc_Product_Adminhtml</ccc_product>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+  </admin>
+</config>
