@@ -1,6 +1,6 @@
 <?php
 
-class Bhargav_Eavmgmt_Block_Adminhtml_eavmgmt_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form
+class Bhargav_Eavmgmt_Block_Adminhtml_eavmgmt_Edit_Tab_Import extends Mage_Adminhtml_Block_Widget_Form
 {
     protected function _prepareForm()
     {

@@ -15,7 +15,7 @@ class Bhargav_Eavmgmt_Block_Adminhtml_Eavmgmt_Edit_Tabs extends Mage_Adminhtml_B
         $this->addTab('form_section', array(
             'label' => Mage::helper('eavmgmt')->__('Import Attribute'),
             'title' => Mage::helper('eavmgmt')->__('eavmgmt Information'),
-            'content' => $this->getLayout()->createBlock('eavmgmt/adminhtml_eavmgmt_edit_tab_form')->toHtml(),
+            'content' => $this->getLayout()->createBlock('eavmgmt/adminhtml_eavmgmt_edit_tab_import')->toHtml(),
         ));
 
         return parent::_beforeToHtml();

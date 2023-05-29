@@ -18,10 +18,6 @@ class Bhargav_Eavmgmt_Model_Resource_Eavmgmt_Collection extends Mage_Eav_Model_R
         $this->getSelect()
             ->from(array('main_table' => $this->getResource()->getMainTable()), $retColumns)
             ->joinLeft(
-                array('additional_table' => $this->getTable('catalog/eav_attribute')),
-                'additional_table.attribute_id = main_table.attribute_id'
-                )
-            ->joinLeft(
                 array('eet'=>'eav_entity_type'),
                 "eet.entity_type_id = main_table.entity_type_id"
             );
