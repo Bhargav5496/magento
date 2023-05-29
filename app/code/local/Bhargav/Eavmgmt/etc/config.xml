@@ -1,68 +1,19 @@
 <config>
     <modules>
-        <Bhargav_Eavmgmt>
-            <version>0.2.0</version>                
+        <Bhargav_Eavmgmt>    
+            <version>0.1.1</version>
         </Bhargav_Eavmgmt>
     </modules>
     <frontend>
-        <routers>
-            <eavmgmt>
-                <use>standard</use>
-                <args>
-                    <module>Bhargav_Eavmgmt</module>
-                    <frontName>eavmgmt</frontName>
-                </args>
-            </eavmgmt>
-        </routers>
         <layout>
             <updates>
-                <eavmgmt>
+                <eavmgmt module="Bhargav_Eavmgmt">
                     <file>eavmgmt.xml</file>
                 </eavmgmt>
             </updates>
         </layout>
     </frontend>
     <global>
-        <resources>
-            <eavmgmt_setup>
-                <setup>
-                    <module>Bhargav_Eavmgmt</module>
-                </setup>
-                <connection>
-                    <use>core_setup</use>
-                </connection>
-            </eavmgmt_setup>
-            <eavmgmt_write>
-                <connection>
-                    <use>core_write</use>
-                </connection>
-            </eavmgmt_write>
-            <eavmgmt_read>
-                <connection>
-                    <use>core_read</use>
-                </connection>
-            </eavmgmt_read>
-        </resources>
-        <resources>
-            <eavmgmt_setup>
-                <setup>
-                    <module>Bhargav_Eavmgmt</module>
-                </setup>
-                <connection>
-                    <use>core_setup</use>
-                </connection>
-            </eavmgmt_setup>
-            <eavmgmt_write>
-                <connection>
-                    <use>core_write</use>
-                </connection>
-            </eavmgmt_write>
-            <eavmgmt_read>
-                <connection>
-                    <use>core_read</use>
-                </connection>
-            </eavmgmt_read>
-        </resources>
         <models>
             <eavmgmt>
                 <class>Bhargav_Eavmgmt_Model</class>
@@ -70,56 +21,62 @@
             </eavmgmt>
             <eavmgmt_resource>
                 <class>Bhargav_Eavmgmt_Model_Resource</class>
+                <deprecatedNode>eavmgmt_mysql4</deprecatedNode>
                 <entities>
                     <eavmgmt>
                         <table>eavmgmt</table>
                     </eavmgmt>
-                    <eavmgmt_address>
-                        <table>eavmgmt_address</table>
-                    </eavmgmt_address>  
                 </entities>
             </eavmgmt_resource>
         </models>
-        <!-- <resources>
-             <eavmgmt_setup>
-                 <setup>
+        <resources>
+            <eavmgmt_setup>
+                <setup>
                     <module>Bhargav_Eavmgmt</module>
-                 </setup>
-             </eavmgmt_setup>
-        </resources> 
-        <eavmgmt_write>
-            <connection>
-                <use>core_write</use>
-            </connection>
-        </eavmgmt_write>
-
-        <eavmgmt_read>
-            <connection>
-                <use>core_read</use>
-            </connection>
-        </eavmgmt_read> -->
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </eavmgmt_setup>
+            <eavmgmt_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </eavmgmt_write>
+            <eavmgmt_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </eavmgmt_read>
+        </resources>
         <blocks>
             <eavmgmt>
                 <class>Bhargav_Eavmgmt_Block</class>
-            </eavmgmt>
+            </eavmgmt> 
         </blocks>
         <helpers>
-            <eavmgmt>
-                <class>Bhargav_Eavmgmt_Helper</class>
+           <eavmgmt>
+                  <class>Bhargav_Eavmgmt_Helper</class>
             </eavmgmt>
         </helpers>
-        
     </global>
     <admin>
         <routers>
-            <adminhtml>
+            <eavmgmt>
+                <use>admin</use>
                 <args>
-                    <modules>
-                        <ccc_eavmgmt before="Mage_Adminhtml">Bhargav_Eavmgmt_Adminhtml</ccc_eavmgmt>
-                    </modules>
+                    <module>Bhargav_Eavmgmt</module>
+                    <frontName>eavmgmt</frontName>
                 </args>
-            </adminhtml>
+            </eavmgmt>
         </routers>
-  </admin>
-  
+         <layout>
+            <updates>
+                <eavmgmt>
+                    <file>eavmgmt.xml</file>
+                </eavmgmt>
+            </updates>
+        </layout>
+    </admin>
 </config>
