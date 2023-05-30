@@ -1,0 +1,144 @@
+"Attribute Id","Entity Type Id","Attribute Code","Frontend Label","Input Type","Backend Type","Source Model"
+1,1,website_id,"Associate to Website",select,static,customer/customer_attribute_source_website
+2,1,store_id,"Create In",select,static,customer/customer_attribute_source_store
+3,1,created_in,"Created From",text,varchar,
+4,1,prefix,Prefix,text,varchar,
+5,1,firstname,"First Name",text,varchar,
+6,1,middlename,"Middle Name/Initial",text,varchar,
+7,1,lastname,"Last Name",text,varchar,
+8,1,suffix,Suffix,text,varchar,
+9,1,email,Email,text,static,
+10,1,group_id,Group,select,static,customer/customer_attribute_source_group
+11,1,dob,"Date Of Birth",date,datetime,
+12,1,password_hash,,hidden,varchar,
+13,1,default_billing,"Default Billing Address",text,int,
+14,1,default_shipping,"Default Shipping Address",text,int,
+15,1,taxvat,"Tax/VAT Number",text,varchar,
+16,1,confirmation,"Is Confirmed",text,varchar,
+17,1,created_at,"Created At",datetime,static,
+18,1,gender,Gender,select,int,eav/entity_attribute_source_table
+19,2,prefix,Prefix,text,varchar,
+20,2,firstname,"First Name",text,varchar,
+21,2,middlename,"Middle Name/Initial",text,varchar,
+22,2,lastname,"Last Name",text,varchar,
+23,2,suffix,Suffix,text,varchar,
+24,2,company,Company,text,varchar,
+25,2,street,"Street Address",multiline,text,
+26,2,city,City,text,varchar,
+27,2,country_id,Country,select,varchar,customer/entity_address_attribute_source_country
+28,2,region,State/Province,text,varchar,
+29,2,region_id,State/Province,hidden,int,customer/entity_address_attribute_source_region
+30,2,postcode,"Zip/Postal Code",text,varchar,
+31,2,telephone,Telephone,text,varchar,
+32,2,fax,Fax,text,varchar,
+33,1,rp_token,,hidden,varchar,
+34,1,rp_token_created_at,,date,datetime,
+35,1,disable_auto_group_change,"Disable Automatic Group Change Based on VAT ID",boolean,static,
+36,2,vat_id,"VAT number",text,varchar,
+37,2,vat_is_valid,"VAT number validity",text,int,
+38,2,vat_request_id,"VAT number validation request ID",text,varchar,
+39,2,vat_request_date,"VAT number validation request date",text,varchar,
+40,2,vat_request_success,"VAT number validation request success",text,int,
+41,1,password_created_at,"Password created at",text,int,
+42,1,rp_customer_id,,hidden,varchar,
+43,3,name,Name,text,varchar,
+44,3,is_active,"Is Active",select,int,eav/entity_attribute_source_boolean
+45,3,url_key,"URL Key",text,varchar,
+46,3,description,Description,textarea,text,
+47,3,image,Image,image,varchar,
+48,3,meta_title,"Page Title",text,varchar,
+49,3,meta_keywords,"Meta Keywords",textarea,text,
+50,3,meta_description,"Meta Description",textarea,text,
+51,3,display_mode,"Display Mode",select,varchar,catalog/category_attribute_source_mode
+52,3,landing_page,"CMS Block",select,int,catalog/category_attribute_source_page
+53,3,is_anchor,"Is Anchor",select,int,eav/entity_attribute_source_boolean
+54,3,path,Path,text,static,
+55,3,position,Position,text,static,
+56,3,all_children,,text,text,
+57,3,path_in_store,,text,text,
+58,3,children,,text,text,
+59,3,url_path,,text,varchar,
+60,3,custom_design,"Custom Design",select,varchar,core/design_source_design
+61,3,custom_design_from,"Active From",date,datetime,
+62,3,custom_design_to,"Active To",date,datetime,
+63,3,page_layout,"Page Layout",select,varchar,catalog/category_attribute_source_layout
+64,3,custom_layout_update,"Custom Layout Update",textarea,text,
+65,3,level,Level,text,static,
+66,3,children_count,"Children Count",text,static,
+67,3,available_sort_by,"Available Product Listing Sort By",multiselect,text,catalog/category_attribute_source_sortby
+68,3,default_sort_by,"Default Product Listing Sort By",select,varchar,catalog/category_attribute_source_sortby
+69,3,include_in_menu,"Include in Navigation Menu",select,int,eav/entity_attribute_source_boolean
+70,3,custom_use_parent_settings,"Use Parent Category Settings",select,int,eav/entity_attribute_source_boolean
+71,3,custom_apply_to_products,"Apply To Products",select,int,eav/entity_attribute_source_boolean
+72,3,filter_price_range,"Layered Navigation Price Step",text,decimal,
+73,4,name,Name,text,varchar,
+74,4,description,Description,textarea,text,
+75,4,short_description,"Short Description",textarea,text,
+76,4,sku,SKU,text,static,
+77,4,price,Price,price,decimal,
+78,4,special_price,"Special Price",price,decimal,
+79,4,special_from_date,"Special Price From Date",date,datetime,
+80,4,special_to_date,"Special Price To Date",date,datetime,
+81,4,cost,Cost,price,decimal,
+82,4,weight,Weight,weight,decimal,
+83,4,manufacturer,Manufacturer,select,int,
+84,4,meta_title,"Meta Title",text,varchar,
+85,4,meta_keyword,"Meta Keywords",textarea,text,
+86,4,meta_description,"Meta Description",textarea,varchar,
+87,4,image,"Base Image",media_image,varchar,
+88,4,small_image,"Small Image",media_image,varchar,
+89,4,thumbnail,Thumbnail,media_image,varchar,
+90,4,media_gallery,"Media Gallery",gallery,varchar,
+91,4,old_id,,text,int,
+92,4,group_price,"Group Price",text,decimal,
+93,4,tier_price,"Tier Price",text,decimal,
+94,4,color,Color,select,int,
+95,4,news_from_date,"Set Product as New from Date",date,datetime,
+96,4,news_to_date,"Set Product as New to Date",date,datetime,
+97,4,gallery,"Image Gallery",gallery,varchar,
+98,4,status,Status,select,int,catalog/product_status
+99,4,url_key,"URL Key",text,varchar,
+100,4,url_path,,text,varchar,
+101,4,minimal_price,"Minimal Price",price,decimal,
+102,4,is_recurring,"Enable Recurring Profile",select,int,eav/entity_attribute_source_boolean
+103,4,recurring_profile,"Recurring Payment Profile",text,text,
+104,4,visibility,Visibility,select,int,catalog/product_visibility
+105,4,custom_design,"Custom Design",select,varchar,core/design_source_design
+106,4,custom_design_from,"Active From",date,datetime,
+107,4,custom_design_to,"Active To",date,datetime,
+108,4,custom_layout_update,"Custom Layout Update",textarea,text,
+109,4,page_layout,"Page Layout",select,varchar,catalog/product_attribute_source_layout
+110,4,category_ids,,text,static,
+111,4,options_container,"Display Product Options In",select,varchar,catalog/entity_product_attribute_design_options_container
+112,4,required_options,,text,static,
+113,4,has_options,,text,static,
+114,4,image_label,"Image Label",text,varchar,
+115,4,small_image_label,"Small Image Label",text,varchar,
+116,4,thumbnail_label,"Thumbnail Label",text,varchar,
+117,4,created_at,,text,static,
+118,4,updated_at,,text,static,
+119,4,country_of_manufacture,"Country of Manufacture",select,varchar,catalog/product_attribute_source_countryofmanufacture
+120,4,msrp_enabled,"Apply MAP",select,varchar,catalog/product_attribute_source_msrp_type_enabled
+121,4,msrp_display_actual_price_type,"Display Actual Price",select,varchar,catalog/product_attribute_source_msrp_type_price
+122,4,msrp,"Manufacturer's Suggested Retail Price",price,decimal,
+123,4,tax_class_id,"Tax Class",select,int,tax/class_source_product
+124,4,gift_message_available,"Allow Gift Message",select,varchar,eav/entity_attribute_source_boolean
+125,4,price_type,,,int,
+126,4,sku_type,,,int,
+127,4,weight_type,,,int,
+128,4,price_view,"Price View",select,int,bundle/product_attribute_source_price_view
+129,4,shipment_type,Shipment,,int,
+130,4,links_purchased_separately,"Links can be purchased separately",,int,
+131,4,samples_title,"Samples title",,varchar,
+132,4,links_title,"Links title",,varchar,
+133,4,links_exist,,,int,
+157,10,firstname,firstname,text,varchar,
+158,10,lastname,lastname,text,varchar,
+159,10,email,email,text,varchar,
+160,10,phoneNo,phoneNo,text,varchar,
+161,10,gender,Gender,text,varchar,
+169,4,brand,Brand,select,int,Bhargav_Brand_Model_Source_Model
+170,11,firstname,firstname,text,varchar,
+171,11,lastname,lastname,text,varchar,
+172,11,email,email,text,varchar,
+173,11,phoneNo,phoneNo,text,varchar,
