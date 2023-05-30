@@ -12,7 +12,7 @@
                     <module>Bhargav_Idx</module>
                     <frontName>idx</frontName>
                 </args>
-            </idx>
+            </idx>  
         </routers>
         <layout>
             <updates>
@@ -23,26 +23,6 @@
         </layout>
     </frontend>
     <global>
-        <resources>
-            <idx_setup>
-                <setup>
-                    <module>Bhargav_Idx</module>
-                </setup>
-                <connection>
-                    <use>core_setup</use>
-                </connection>
-            </idx_setup>
-            <idx_write>
-                <connection>
-                    <use>core_write</use>
-                </connection>
-            </idx_write>
-            <idx_read>
-                <connection>
-                    <use>core_read</use>
-                </connection>
-            </idx_read>
-        </resources>
         <resources>
             <idx_setup>
                 <setup>
@@ -74,9 +54,6 @@
                     <idx>
                         <table>import_product_idx</table>
                     </idx>
-                    <idx_address>
-                        <table>idx_address</table>
-                    </idx_address>  
                 </entities>
             </idx_resource>
         </models>
@@ -94,13 +71,13 @@
     </global>
     <admin>
         <routers>
-            <adminhtml>
+            <idx>
+                <use>admin</use>
                 <args>
-                    <modules>
-                        <ccc_idx before="Mage_Adminhtml">Bhargav_Idx_Adminhtml</ccc_idx>
-                    </modules>
+                    <module>Bhargav_Idx</module>
+                    <frontName>idx</frontName>
                 </args>
-            </adminhtml>
+            </idx>
         </routers>
   </admin>
   

@@ -6,4 +6,4 @@ class Bhargav_Idx_Model_Resource_Idx extends Mage_Core_Model_Resource_Db_Abstrac
     {  
         $this->_init('idx/idx', 'index');
     }  
-}
+} 

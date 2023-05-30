@@ -7,7 +7,7 @@
             <children>
                 <manage translate="title" module="idx">
                     <title>Manage Idxs</title>
-                    <action>adminhtml/idx/index</action>
+                    <action>idx/adminhtml_idx/index</action>
                     <sort_order>0</sort_order>
                 </manage>
             </children>
