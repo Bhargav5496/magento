@@ -3,7 +3,7 @@ class Bhargav_Eavmgmt_Model_Source_Option extends Mage_Eav_Model_Entity_Attribut
 {
     public function getAllOptions()
     {
-        $eavmgmts = Mage::getModel('eavmgmt/eavmgmt')->getCollection()->getItems();
+        $eavmgmts = Mage::getModel('eavmgmt/eavmgmt')->getColl ection()->getItems();
         $options = array();
         foreach ($eavmgmts as $key=>$eavmgmt) {
             $options[] = array('value'=>$eavmgmt->eavmgmt_id, 'label'=>$eavmgmt->name);

@@ -15,15 +15,19 @@ class Bhargav_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Acti
 
     public function indexAction()
     {
-        $this->loadLayout();
-        $this->_title($this->__("idx Grid"));
-        $this->_setActiveMenu('idx/manage');
-        $this->_addContent($this->getLayout()->createBlock('idx/adminhtml_idx'));
-        $this->renderLayout();
+        try{
+            $this->loadLayout();
+            $this->_title($this->__("idx Grid"));
+            $this->_setActiveMenu('idx/manage');
+            $this->_addContent($this->getLayout()->createBlock('idx/adminhtml_idx'));
+            $this->renderLayout();
+        }catch(Exception $e){
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
     }
 
     public function editAction() {
-        $id = $this->getRequest()->getParam('index');
+        try{
             $this->loadLayout();
             $this->_setActiveMenu('idx/items');
             $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
@@ -32,6 +36,9 @@ class Bhargav_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Acti
                 ->_addLeft($this->getLayout()
                     ->createBlock('idx/adminhtml_idx_edit_tabs'));
             $this->renderLayout();
+        }catch(Exception $e){
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
     }
 
     public function importCsvAction()
@@ -186,6 +193,74 @@ class Bhargav_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Acti
         }
 
         $this->_redirect('*/*/index');
+    }
+
+
+    public function productAction()
+    {
+        try{
+            $idxCollection = Mage::getModel('idx/idx')->getCollection(); 
+
+            foreach ($idxCollection as $idxRow) {
+                if (!$idxRow->brand_id) {
+                    throw new Exception('Brand is not fine');
+                }
+                
+                if (!$idxRow->collection_id) {
+                    throw new Exception('Collection is not fine');
+                }
+            }
+
+            foreach ($idxCollection as $idxRow) {
+                $productId = Mage::getResourceModel('catalog/product')->getIdBySku($sku);
+                if ($productId) {
+                    $sql = "UPDATE `import_product_idx` SET `product_id` = {$productId} WHERE `sku` = {$sku}";
+                    $idxRow->query($sql);
+                }
+            }
+
+            $missingProducts = $idxCollection->addFieldToFilter('product_id', 0);
+
+            foreach ($missingProducts as $missingProduct) {
+                $productData = [
+                    'entity_type_id' => 4,
+                    'attribute_set_id' => 4,
+                    'type_id' => 'simple',
+                    'sku' => $missingProduct->sku,
+                    'has_option' => 0,
+                    'required_options' => 0,
+                    'name' => $missingProduct->name,
+                    'price' => $missingProduct->price,
+                    'status' => $missingProduct->status,
+                    'visibility' => '4',
+                    'created_at' => now()
+                ];
+                
+                $storeId = Mage_Core_Model_App::ADMIN_STORE_ID;
+                $product = Mage::getModel('catalog/product');
+                $product->setStoreId($storeId)
+                        ->setData($productData)
+                        ->setStockData(array(
+                                'is_in_stock' => 1,
+                                'qty' => $missingProduct->quantity),
+                            )
+                        ->save();
+                
+                $sql = "UPDATE `import_product_idx` SET `product_id` = '{$product->entity_id}' WHERE `sku` = '{$product->sku}'";
+                Mage::getModel('idx/idx')->query($sql) ;
+            }
+
+            $missingProductIds = $idxCollection->addFieldToFilter('product_id', 0);
+
+            if ($missingProductIds->getData()) {
+                throw new Exception('There are products without Product Ids.');
+            }
+            Mage::getSingleton('adminhtml/session')->addSuccess('Products are successfully imported');
+        }catch(Exception $e){
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
+        $this->_redirect('*/*/index');
+
     }
 
 }

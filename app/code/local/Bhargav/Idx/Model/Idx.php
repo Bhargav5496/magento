@@ -77,13 +77,19 @@ class Bhargav_Idx_Model_Idx extends Mage_Core_Model_Abstract
         foreach ($newBrands as $name) {
             $prepareData[] = ['name'=>$name];
         }
-            if($prepareData){
+            if($prepareData){ 
             $resource = Mage::getSingleton('core/resource');
             $tableName = $resource->getTableName('brand');
             $writeConnection = $resource->getConnection('core_write');
             $writeConnection->insertMultiple($tableName, $prepareData);
         }
         return true;
+    }
+
+    public function query($sql)
+    {
+        $writeAdapter = Mage::getSingleton('core/resource')->getConnection('core_write');
+        return $writeAdapter->query($sql); 
     }
 
     public function reset()
