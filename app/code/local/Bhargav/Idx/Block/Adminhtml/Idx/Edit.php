@@ -12,7 +12,7 @@ class Bhargav_Idx_Block_Adminhtml_Idx_Edit extends Mage_Adminhtml_Block_Widget_F
         $this->_updateButton('save', 'label', Mage::helper('idx')->__('Save'));
         $this->_updateButton('delete', 'label', Mage::helper('idx')->__('Delete'));
 
-        $this->_addButton('saveandcontinue', array(
+        $this->_addButton('saveandcontinue', array( 
         'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
         'onclick' => 'saveAndContinueEdit()',
         'class' => 'save',

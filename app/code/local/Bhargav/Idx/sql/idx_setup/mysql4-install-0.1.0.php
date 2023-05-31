@@ -13,7 +13,7 @@ CREATE TABLE `import_product_idx` (
   `name` varchar(255) NOT NULL,
   `price` decimal(10) NOT NULL,
   `cost` decimal(10) NOT NULL,
-  `quality` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
   `brand` varchar(255) NOT NULL,
   `brand_id` int(11) NOT NULL,
   `collection` varchar(255) NOT NULL,
