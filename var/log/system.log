@@ -1260,3 +1260,5 @@
 2023-05-31T13:06:27+00:00 ERR (3): Notice: Undefined variable: sku  in C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Bhargav\Idx\controllers\AdminHtml\IdxController.php on line 215
 2023-05-31T13:06:27+00:00 ERR (3): Notice: Undefined variable: sku  in C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Bhargav\Idx\controllers\AdminHtml\IdxController.php on line 215
 2023-05-31T13:06:27+00:00 ERR (3): Notice: Undefined variable: sku  in C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Bhargav\Idx\controllers\AdminHtml\IdxController.php on line 215
+2023-06-01T04:11:44+00:00 ERR (3): Notice: Undefined variable: prepareData  in C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Bhargav\Idx\Model\Idx.php on line 80
+2023-06-01T04:11:52+00:00 ERR (3): Notice: Undefined variable: prepareData  in C:\xampp\htdocs\2023\magento\magento-mirror\app\code\local\Bhargav\Idx\Model\Idx.php on line 41

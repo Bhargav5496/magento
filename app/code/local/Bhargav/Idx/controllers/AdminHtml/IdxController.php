@@ -212,6 +212,7 @@ class Bhargav_Idx_Adminhtml_IdxController extends Mage_Adminhtml_Controller_Acti
             }
 
             foreach ($idxCollection as $idxRow) {
+                $sku = $idxRow->sku;
                 $productId = Mage::getResourceModel('catalog/product')->getIdBySku($sku);
                 if ($productId) {
                     $sql = "UPDATE `import_product_idx` SET `product_id` = {$productId} WHERE `sku` = {$sku}";
