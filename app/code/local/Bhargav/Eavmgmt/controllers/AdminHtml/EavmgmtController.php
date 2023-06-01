@@ -8,6 +8,7 @@ class Bhargav_Eavmgmt_Adminhtml_EavmgmtController extends Mage_Adminhtml_Control
              ->_title($this->__('Manage Eavmgmts'));
         $this->loadLayout();
         $this->_addContent($this->getLayout()->createBlock('eavmgmt/adminhtml_eavmgmt'));
+        $this->_setActiveMenu('eavmgmt/manage');
         $this->renderLayout();
     }
 

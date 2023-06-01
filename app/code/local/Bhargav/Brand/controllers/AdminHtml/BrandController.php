@@ -15,15 +15,9 @@ class Bhargav_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_
 
     public function indexAction()
     {
-        // echo '<pre>';
-        // $model = Mage::getModel('brand/brand')->load(2);
-        // $model->name = 'vijay thakor';
-        // $model->image = 'v@gmial.com';
-        // $model->save();
-        // print_r($model->getCollection()->toArray());
-        // die();
         $this->loadLayout();
         $this->_title($this->__("brand Grid"));
+        $this->_setActiveMenu('brand/manage');
         $this->_addContent($this->getLayout()->createBlock('brand/adminhtml_brand'));
         $this->renderLayout();
     }

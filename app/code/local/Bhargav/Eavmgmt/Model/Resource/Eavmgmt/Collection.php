@@ -5,7 +5,6 @@ class Bhargav_Eavmgmt_Model_Resource_Eavmgmt_Collection extends Mage_Eav_Model_R
     
     protected function _initSelect()
     {
-        // $entityTypeId = (int)Mage::getModel('eav/entity')->setType(Mage_Catalog_Model_Product::ENTITY)->getTypeId();
         $columns = $this->getConnection()->describeTable($this->getResource()->getMainTable());
         $retColumns = array();
         foreach ($columns as $labelColumn => $columnData) {
