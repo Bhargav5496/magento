@@ -39,11 +39,7 @@ class Bhargav_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_
         if (!empty($data)) {
             $model1->setData($data);
         }
-
         
-        if (!empty($data)) {
-            $model2->setData($data);
-        }
         Mage::register('brand_data', $model1);
         $this->loadLayout();
         $this->_setActiveMenu('brand/items');
