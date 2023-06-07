@@ -14,11 +14,23 @@ class Bhargav_Brand_Block_Adminhtml_Brand_Edit_Tab_Brand extends Mage_Adminhtml_
             'required'  => true,
         ));
 
+        // $fieldset->addField('url_key', 'text', array(
+        //     'name'      => 'brand[url_key]',
+        //     'label'     => Mage::helper('brand')->__('Url Key'),
+        //     'required'  => true,
+        // ));
+
         $fieldset->addField('image', 'file', array(
             'name'      => 'image',
             'class'     => 'validate-image-file',
-            'note'      => Mage::helper('brand')->__('Allowed file types: JPG, JPEG, PNG, GIF'),
-            'label'     => Mage::helper('brand')->__('Image'),
+            'label'     => Mage::helper('brand')->__('Brand Image'),
+            'required'  => true,
+        ));
+
+        $fieldset->addField('banner_image', 'file', array(
+            'name'      => 'banner_image',
+            'class'     => 'validate-banner-image-file',
+            'label'     => Mage::helper('brand')->__('Banner Image'),
             'required'  => true,
         ));
 
