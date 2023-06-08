@@ -44,14 +44,14 @@ class Bhargav_Brand_Model_Brand extends Mage_Core_Model_Abstract
         $rewriteUrl = 'brand/' . $brandId;
 
         $rewrite = Mage::getModel('core/url_rewrite')->getCollection()
-            ->addFieldToFilter('request_path', $rewriteUrl)
+            ->addFieldToFilter('request_path', $urlKey)
             ->getFirstItem();
 
         if (!$rewrite->getId()) {
             $rewrite->setStoreId(0) 
                 ->setIdPath($rewriteUrl)
                 ->setRequestPath($this->url_key)
-                ->setTargetPath('brand/index/view/id/' . $brandId)
+                ->setTargetPath('brand/view/index/id/' . $brandId)
                 ->setIsSystem(0)
                 ->save();
         }

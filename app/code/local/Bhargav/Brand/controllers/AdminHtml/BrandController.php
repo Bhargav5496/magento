@@ -77,6 +77,7 @@ class Bhargav_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_
                         $model->created_at = date('Y-m-d H:i:s');
                     }
                     $model->save();
+                // echo "<pre>";print_r($model);die;
                     
                     if ($model->brand_id) {
                         $model->saveRewriteUrlKey();

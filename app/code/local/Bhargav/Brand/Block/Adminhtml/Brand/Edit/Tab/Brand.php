@@ -14,20 +14,37 @@ class Bhargav_Brand_Block_Adminhtml_Brand_Edit_Tab_Brand extends Mage_Adminhtml_
             'required'  => true,
         ));
 
-        // $fieldset->addField('url_key', 'text', array(
-        //     'name'      => 'brand[url_key]',
-        //     'label'     => Mage::helper('brand')->__('Url Key'),
-        //     'required'  => true,
-        // ));
 
-        $fieldset->addField('image', 'file', array(
+        $fieldset->addField('image', 'image', array(
             'name'      => 'image',
             'class'     => 'validate-image-file',
             'label'     => Mage::helper('brand')->__('Brand Image'),
             'required'  => true,
         ));
 
-        $fieldset->addField('banner_image', 'file', array(
+        
+        $fieldset->addField('sort_order', 'text', array(
+            'label' => Mage::helper('brand')->__('Sort Order'),
+            'name' => 'brand[sort_order]',
+            'required' => true
+        ));
+
+        $fieldset->addField('status', 'select', array(
+            'label' => Mage::helper('brand')->__('Status'),
+            'name' => 'brand[status]',
+            'values' => array(
+                array(
+                    'value' => 1,
+                    'label' => Mage::helper('brand')->__('Active')
+                ),
+                array(
+                    'value' => 0,
+                    'label' => Mage::helper('brand')->__('Inactive')
+                )
+            )
+        ));
+
+        $fieldset->addField('banner_image', 'image', array(
             'name'      => 'banner_image',
             'class'     => 'validate-banner-image-file',
             'label'     => Mage::helper('brand')->__('Banner Image'),
