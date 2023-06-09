@@ -75,13 +75,9 @@ class Bhargav_Brand_Adminhtml_BrandController extends Mage_Adminhtml_Controller_
                         $model->updated_at = date('Y-m-d H:i:s');
                     } else {
                         $model->created_at = date('Y-m-d H:i:s');
+                        Mage::dispatchEvent('brand_save_after', ['brand'=>$model]);
                     }
                     $model->save();
-                // echo "<pre>";print_r($model);die;
-                    
-                    if ($model->brand_id) {
-                        $model->saveRewriteUrlKey();
-                    }
                     
                     Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('brand')->__('Brand was successfully saved'));
                     Mage::getSingleton('adminhtml/session')->setFormData(false);

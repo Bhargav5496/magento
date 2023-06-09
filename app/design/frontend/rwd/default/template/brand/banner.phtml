@@ -1,19 +1,53 @@
+
+
 <style type="text/css">
+
+.col3-layout .col-wrapper{
+  float: left;
+  width: inherit;
+}
+
+
+.col3-layout .col-wrapper .col-main {
+    float: right;
+    width: inherit;
+}
 .container{
-  display: flex;
+  position: relative;
+  box-shadow: 10px 0px 10px;
+  justify-content: center;
 }
 .card {
   height: 300px;
 }
+
+pre{
+  position: absolute;
+  font-size: 20px;
+  color: white;
+  font-weight: 10px;
+  left: 0;
+  margin-left: 1em;
+  bottom: 0;
+  width: 50%;
+}
+
+
+.banner-heading{
+  font-weight: bold;
+  color: white;
+}
+
 </style>
 
-
-<div class="container">
+<div class="container" style="width: 100%;">
     <?php foreach ($this->getBanner() as $banner): ?>
-    <div>
+    <div >
       <img src="<?php echo Mage::getBaseUrl('media').'brand/banner/'.$banner->banner_image; ?>" width="100%">
-      <p>Brand Name: <?php echo $banner->name ?></p>
-      <p>Brand Name: <?php echo $banner->description ?></p>
+      <pre>
+        <h1 class="banner-heading"><?php echo $banner->name ?> </h1>
+        <p><?php echo $banner->description ?></p>    
+      </pre>
     </div>
     <?php endforeach ?>
 </div>
@@ -21,7 +55,7 @@
 <style type="text/css">
 .banner-image{
   height: 500px;
-  width: 1265px;
+  width: 100%;
   margin-left: -300px;
   position: relative;
   filter: drop-shadow(8px 8px 10px gray);
@@ -37,23 +71,71 @@
   left: 36px;
 }
 
-.card-image{
-  height: 175px;
+.card-image {
+    height: 175px;
+    width: auto;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.product-div {
+    display: inline-flex;
+    margin-top: 1em;
+    flex-wrap: wrap;
+    width: -webkit-fill-available;
+    justify-content: start-first;
+}
+
+.card{
+  border: 1px solid gray;
+  box-shadow: 5px 5px 4px;
+  border-radius: 10px;
+  margin-left: 2em;
+  margin-bottom: 2em;
+}
+
+.category-div{
+  display: block;
+  width: 24em;
+  margin-right: 1em;
+  padding: 1em;
+/*  border: 1px solid black;*/
+}
+
+.middle{
+  display: flex;
 }
 
 </style>
 
 
-<div style="display:flex;">
-  <?php foreach ($this->getProductsByBrand() as $key => $value): ?>
-  <div class="card m-1" style="width: 18rem; ">
-  <img class="card-img-top card-image" src="<?php echo Mage::getBaseUrl('media').'catalog/product' . $value->getImage() ?>" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title"><?php echo $value->name ?></h5>
-    <p class=""><?php echo $value->getShortDescription() ?></p>
-    <p class=""><b>$ <?php echo $value->getPrice() ?></b></p>
-    <?php echo $value->getUrlKey(); ?>
+<div class="middle">
+  <div class="category-div">
+    <?php $categories = $this->getCategory();?>
+    <div>
+      <section>
+        <div>
+            <h6>CATAGORIES</h6>
+            <ul>
+                <?php foreach ($categories as $category):?>
+                     <li><a href="<?php echo Mage::getUrl('', array('_current' => true, '_use_rewrite' => true, '_query' => array('cat' => $category->getId()))); ?>"><?php echo $category->getName() ?></a></li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+      </section>
+    </div>
   </div>
-</div>
-  <?php endforeach ?>
+  <div class="product-div" >
+    <?php foreach ($this->getProducts() as $key => $value): ?>
+      <div class="card m-1" style="width: 17rem; padding: 1em;">
+        <img class="card-img-top card-image" src="<?php echo Mage::getBaseUrl('media').'catalog/product' . $value->getImage() ?>" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"><?php echo $value->name ?></h5>
+          <p><?php echo $value->getShortDescription() ?></p>
+          <p><b>$ <?php echo number_format($value->getPrice(), 2, '.', ',') ?></b></p>
+          <?php echo $value->getUrlKey(); ?>
+        </div>
+    </div>
+    <?php endforeach ?>
+  </div> 
 </div>

@@ -16,7 +16,7 @@
         </routers>
         <layout>
             <updates>
-                <brand>
+                <brand module="Bhargav_Brand">
                     <file>brand.xml</file>
                 </brand>
             </updates>

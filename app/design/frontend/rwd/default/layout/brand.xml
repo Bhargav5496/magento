@@ -3,18 +3,23 @@
     <default>
         <remove name="right"/>
     </default>
-    <brand_view_index>
-        <remove name="right"/>
-        <reference name="content">
-            <block type="brand/brand" name="brand_banner" template="brand/banner.phtml"/>
-        </reference>
-    </brand_view_index>
     <cms_index_index>
-        <reference name="root">
-            <action method="setTemplate"><template>page/1column.phtml</template></action>
-        </reference>
         <reference name="content">
             <block type="brand/brand" name="default_home_page" template="brand/brand.phtml"/>
         </reference>
     </cms_index_index>
+    <brand_view_index>
+        <remove name="right"></remove>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="brand/brand" name="brand_banner" template="brand/banner.phtml"/>
+        </reference>
+        <reference name="left">
+            <block type="brand/brand" name="brand_category" template="brand/category.phtml"/>
+        </reference>
+    </brand_view_index>
 </layout>
