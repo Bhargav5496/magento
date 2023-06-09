@@ -1,7 +1,7 @@
 <config>
     <modules>
         <Bhargav_Brand>
-            <version>0.2.0</version>                
+            <version>0.3.0</version>                
         </Bhargav_Brand>
     </modules>
     <frontend>
@@ -16,7 +16,7 @@
         </routers>
         <layout>
             <updates>
-                <brand>
+                <brand module="Bhargav_Brand">
                     <file>brand.xml</file>
                 </brand>
             </updates>

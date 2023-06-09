@@ -8,7 +8,7 @@ class Bhargav_Idx_Block_Adminhtml_Idx_Grid extends Mage_Adminhtml_Block_Widget_G
          
         $this->setDefaultSort(`index`);
         $this->setId('adminhtmlIdxGrid');
-        $this->setUseAjax(true);
+        // $this->setUseAjax(true);
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
 
@@ -119,10 +119,10 @@ class Bhargav_Idx_Block_Adminhtml_Idx_Grid extends Mage_Adminhtml_Block_Widget_G
         return $this;
     }
 
-    public function getGridUrl()
-    {
-        return $this->getUrl('*/*/grid', array('_current'=> true));
-    }
+    // public function getGridUrl()
+    // {
+    //     return $this->getUrl('*/*/grid', array('_current'=> true));
+    // }
 
     public function getRowUrl($row)
     {

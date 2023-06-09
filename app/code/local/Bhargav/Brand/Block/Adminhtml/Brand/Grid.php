@@ -44,6 +44,20 @@ class Bhargav_Brand_Block_Adminhtml_Brand_Grid extends Mage_Adminhtml_Block_Widg
                 'header'=> $this->__('Name'),
                 'index' => 'name'
             )
+        );   
+
+        $this->addColumn('url_key',
+            array(
+                'header'=> $this->__('Url Key'),
+                'index' => 'url_key'
+            )
+        );    
+
+        $this->addColumn('sort_order',
+            array(
+                'header'=> $this->__('Sort Order'),
+                'index' => 'sort_order'
+            )
         );    
 
         $this->addColumn('image',
