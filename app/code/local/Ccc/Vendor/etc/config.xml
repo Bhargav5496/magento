@@ -1,7 +1,7 @@
 <config>
     <modules>
         <Ccc_Vendor>
-            <version>0.2.0</version>                
+            <version>1.0.0</version>                
         </Ccc_Vendor>
     </modules>
     <frontend>
@@ -74,14 +74,13 @@
     </global>
     <admin>
         <routers>
-            <adminhtml>
+            <vendor>
+                <use>admin</use>
                 <args>
-                    <modules>
-                        <ccc_vendor before="Mage_Adminhtml">Ccc_Vendor_Adminhtml</ccc_vendor>
-                    </modules>
+                    <module>Ccc_Vendor</module>
+                    <frontName>vendor</frontName>
                 </args>
-            </adminhtml>
+            </vendor>
         </routers>
-  </admin>
-  
+    </admin>
 </config>

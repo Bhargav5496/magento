@@ -37,6 +37,4 @@ class Ccc_Category_Block_Adminhtml_Category_Edit extends Mage_Adminhtml_Block_Wi
         return $this->getUrl('*/*/delete', array('id' => $this->getRequest()->getParam('id')));
     }
 
-    
-
 }
