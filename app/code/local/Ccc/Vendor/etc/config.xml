@@ -1,7 +1,7 @@
 <config>
     <modules>
         <Ccc_Vendor>
-            <version>0.2.0</version>                
+            <version>1.0.0</version>                
         </Ccc_Vendor>
     </modules>
     <frontend>
@@ -73,6 +73,14 @@
         
     </global>
     <admin>
-                
+        <routers>
+            <vendor>
+                <use>admin</use>
+                <args>
+                    <module>Ccc_Vendor</module>
+                    <frontName>vendor</frontName>
+                </args>
+            </vendor>
+        </routers>
     </admin>
 </config>

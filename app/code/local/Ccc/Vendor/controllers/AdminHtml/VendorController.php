@@ -15,15 +15,9 @@ class Ccc_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Ac
 
     public function indexAction()
     {
-        // echo '<pre>';
-        // $model = Mage::getModel('vendor/vendor')->load(2);
-        // $model->name = 'vijay thakor';
-        // $model->email = 'v@gmial.com';
-        // $model->save();
-        // print_r($model->getCollection()->toArray());
-        // die();
         $this->loadLayout();
-        $this->_title($this->__("vendor Grid"));
+        $this->_setActiveMenu('vendor');
+        $this->_title($this->__("Vendor Grid"));
         $this->_addContent($this->getLayout()->createBlock('vendor/adminhtml_vendor'));
         $this->renderLayout();
     }
@@ -66,6 +60,54 @@ class Ccc_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Ac
             $this->_redirect('*/*/');
         }
     }
+
+    public function updateStateOptionsAction()
+    {
+
+        $countryId = $this->getRequest()->getParam('country_id');
+        Mage::log($countryId,null,'country.log');
+        $options = array();
+
+        // print_r($countryId);die;
+        // Retrieve the state options for the selected country
+        $states = Mage::getModel('directory/region')->getResourceCollection()
+            ->addCountryFilter($countryId)
+            ->load();
+        
+        // Build the options array
+        foreach ($states as $state) {
+            $options[] = array(
+                'value' => $state->getId(),
+                'label' => $state->getName()
+            );
+        }
+        
+        // Return the options as JSON response
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(json_encode($options));
+    }
+
+    public function massStatusAction()
+    {
+        $vendorIds = $this->getRequest()->getParam('vendor');
+        $status = $this->getRequest()->getParam('status');
+
+        try {
+            foreach ($vendorIds as $vendorId) {
+                $vendor = Mage::getModel('vendor/vendor')->load($vendorId);
+                $vendor->setStatus($status)->save();
+            }
+            
+            Mage::getSingleton('adminhtml/session')->addSuccess(
+                Mage::helper('vendor')->__('Status has been updated for selected vendors.')
+            );
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
+
+        $this->_redirect('*/*/index');
+    }
+
 
     public function saveAction()
     {

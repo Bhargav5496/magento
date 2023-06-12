@@ -1,8 +1,6 @@
 <?php
 $installer = $this;
-
 $installer->startSetup();
-
 $installer->run("
   DROP TABLE IF EXISTS {$this->getTable('category')};
   CREATE TABLE {$this->getTable('category')} (
@@ -13,10 +11,8 @@ $installer->run("
     `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
-
 ALTER TABLE {$this->getTable('category')}
   ADD PRIMARY KEY (`category_id`);
-
 
 ALTER TABLE {$this->getTable('category')}
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;

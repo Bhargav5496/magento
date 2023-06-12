@@ -11,18 +11,28 @@ class Ccc_Vendor_Block_Adminhtml_Vendor_Edit extends Mage_Adminhtml_Block_Widget
         $this->_controller = 'adminhtml_vendor';
 
         $this->_updateButton('save', 'label', Mage::helper('vendor')->__('Save'));
-        $this->_updateButton('delete', 'label', Mage::helper('vendor')->__('Delete'));
+        $this->_addButton('delete', array(
+            'label'   => Mage::helper('adminhtml')->__('Delete'),
+            'onclick' => "deleteConfirm('" . Mage::helper('adminhtml')->__('Are you sure you want to delete this vendor data?') . "', '" . $this->getDeleteUrl() . "')",
+            'class'   => 'delete',
+        ));
 
-        $this->_addButton('saveandcontinue', array(
-        'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
-        'onclick' => 'saveAndContinueEdit()',
-        'class' => 'save',
-        ), -100);
+        $this->_removeButton('reset');
     }
 
     public function getHeaderText()
     {
-        return Mage::helper('vendor')->__('Edit Vendor');
+        if (Mage::registry('vendor_data')->getId()) {
+            return Mage::helper('vendor')->__("Edit Vendor");
+        }
+        else {
+            return Mage::helper('vendor')->__('New Vendor');
+        }
+    }
+
+    public function getDeleteUrl()
+    {
+        return $this->getUrl('*/*/delete', array('id' => $this->getRequest()->getParam('id')));
     }
 
 }
