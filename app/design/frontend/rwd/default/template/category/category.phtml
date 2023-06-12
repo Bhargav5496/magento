@@ -1,3 +1,5 @@
+
+
 <style>
     .card {
         border: 1px solid #ccc;
@@ -37,13 +39,13 @@
         color: blue;
     }
 </style>
-<div class="heading">
-    Shop By
-    <span class="sub-heading">Categories</span>
+<div style="font-weight: 600;" class="heading">
+    Shop by
+    <span class="sub-heading">Department</span>
 </div>
 <div style="display:flex; flex-wrap: wrap;justify-content: start; margin-bottom: 3rem;">
-    <?php foreach ($this->getCategorys() as $category) : ?>
-        <?php if($category->getId() != 2): ?>
+    <?php foreach ($this->getCategories() as $category) : ?>
+        <?php if($category->getId() != 2 && $category->getProductCount() > 1): ?>
         <div class="card">
             <a href="<?php echo $this->getCategoryUrl($category); ?>">
                 <img src="<?php echo $category->getImageUrl(); ?>" alt="categories">

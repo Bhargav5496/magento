@@ -5,6 +5,7 @@
     </default>
     <cms_index_index>
         <reference name="content">
+            <remove name="cms_page" />
             <block type="brand/brand" name="default_home_page" template="brand/brand.phtml"/>
         </reference>
     </cms_index_index>

@@ -61,6 +61,12 @@
             <category>
                 <class>Ccc_Category_Block</class>
             </category>
+            <adminhtml>
+                <rewrite>
+                    <catalog_category_tree>Ccc_Category_Block_Catalog_Category_Tree</catalog_category_tree>
+                </rewrite>
+            </adminhtml>
+
         </blocks>
         <helpers>
             <category>

@@ -1,15 +1,16 @@
 <?php
 class Ccc_Category_Block_Category extends Mage_Core_Block_Template
 {
-    public function getCategorys()
+    public function getCategories()
     {
         $categories = Mage::getModel('catalog/category')
             ->getCollection()
             ->addAttributeToSelect('image')
             ->addAttributeToSelect('name')
-            ->addAttributeToSelect('is_active')
-            ->addFieldToFilter('featured_category', 1)
+            // ->addAttributeToSelect('is_active')
+            // ->addFieldToFilter('featured_category', 1)
             ->addIsActiveFilter();
+        
         return $categories;
     }
 
