@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <remove name="right"/>
+    </default>
+    <cms_index_index>
+        <reference name="content">
+            <block type="category/category" name="featured_category" after="default_home_page" template="category/category.phtml"/>
+        </reference>
+    </cms_index_index>
+    <catalog_category_view>
+        <remove name="right"></remove>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/2columns-left.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="category/category" name="category_products" template="category/category_product.phtml"/>
+        </reference>
+        <!-- <reference name="left">
+            <block type="brand/brand" name="brand_category" template="brand/category.phtml"/>
+        </reference> -->
+    </catalog_category_view>
+</layout>

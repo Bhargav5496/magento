@@ -1,0 +1,19 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<div style="font-weight: 600;" class="heading">
+    Featured
+    <span class="sub-heading">Brands</span>
+</div>
+<div style="display: flex;">
+  <?php foreach ($this->getBrands() as $brand): ?>
+    <!-- <?php echo Mage::getBaseUrl('media').'brand/banner/'.$brand->image;?> -->
+    <a href="<?php echo Mage::getBaseUrl(). $brand->url_key;?>">
+    <div id = "demo" class="card m-1" style="width: 18rem;">
+        <img class="card-img-top" src="<?php echo Mage::getBaseUrl('media').'brand/'.$brand->image;?>" alt="Card image cap">
+    <div class="card-body">
+    </a>
+      <p class="text card-text text-center"><?php echo $brand->name;?></p>
+    </div>
+  </div>
+  <?php endforeach ?>
+</div>

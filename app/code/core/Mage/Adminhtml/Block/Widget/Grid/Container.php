@@ -43,6 +43,7 @@ class Mage_Adminhtml_Block_Widget_Grid_Container extends Mage_Adminhtml_Block_Wi
     {
         if (is_null($this->_addButtonLabel)) {
             $this->_addButtonLabel = $this->__('Add New');
+            // echo "<pre>";print_r($this->_addButtonLabel);die;
         }
         if(is_null($this->_backButtonLabel)) {
             $this->_backButtonLabel = $this->__('Back');
