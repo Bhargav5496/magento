@@ -6,21 +6,9 @@ class Ccc_Category_Block_Adminhtml_Category_Edit_Tab_Category extends Mage_Admin
     {
         $model = Mage::registry('category_data');
         $form = new Varien_Data_Form();
-        $fieldset = $form->addFieldset('category_form',array('legend'=>Mage::helper('category')->__('Category information')));
+
+        $fieldset = $form->addFieldset('category_form',array('legend'=>Mage::helper('category')->__('Category Information')));
         
-        $fieldset->addField('parent_id', 'text', array(
-            'name'      => 'category[parent_id]',
-            'label'     => Mage::helper('category')->__('parent_id'),
-            'required'  => true,
-        ));
-
-
-        $fieldset->addField('path', 'text', array(
-            'name'      => 'category[path]',
-            'label'     => Mage::helper('category')->__('Path'),
-            'required'  => true,
-        ));
-
         $fieldset->addField('name', 'text', array(
             'name'      => 'category[name]',
             'label'     => Mage::helper('category')->__('Name'),
@@ -39,12 +27,6 @@ class Ccc_Category_Block_Adminhtml_Category_Edit_Tab_Category extends Mage_Admin
             ),
         ));
         
-        $fieldset->addField('description', 'text', array(
-            'name'      => 'category[description]',
-            'label'     => Mage::helper('category')->__('Description'),
-            'required'  => true,
-        ));
-
         $this->setForm($form);
         $form->setValues($model->getData());
 

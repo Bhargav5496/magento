@@ -2,14 +2,14 @@
 <config>
    <menu>
         <category translate="title" module="category">
-            <title>Categories</title>
+            <title>Category</title>
             <sort_order>10</sort_order>
             <children>
-                <manage translate="title" module="category">
+                <managecategory module="category">
                     <title>Manage Categories</title>
-                    <action>adminhtml/category/index</action>
-                    <sort_order>0</sort_order>
-                </manage>
+                    <action>category/adminhtml_category/</action>
+                    <sort_order>10</sort_order>
+                </managecategory>
             </children>
          </category>
     </menu>
@@ -21,12 +21,12 @@
         <admin>
             <children>
                 <category translate="title" module="category">
-                <title>category</title>
+                <title>Categories</title>
                 <sort_order>1000</sort_order>
                 <children>
-                <categorybackend translate="title">
-                    <title>Manage Categories</title>
-                </categorybackend>
+                    <managecategory template="title">
+                        <title>Manage Category</title>
+                    </managecategory>
                 </children>
             </category>
           </children>
