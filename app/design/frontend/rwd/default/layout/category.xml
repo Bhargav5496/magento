@@ -5,11 +5,10 @@
     </default>
     <cms_index_index>
         <reference name="content">
-            <remove name="cms_page" />
-            <block type="brand/brand" name="default_home_page" template="brand/brand.phtml"/>
+            <block type="category/category" name="featured_category" after="default_home_page" template="category/category.phtml"/>
         </reference>
     </cms_index_index>
-    <brand_view_index>
+    <catalog_category_view>
         <remove name="right"></remove>
         <reference name="root">
             <action method="setTemplate">
@@ -17,10 +16,10 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="brand/brand" name="brand_banner" template="brand/banner.phtml"/>
+            <block type="category/category" name="category_products" template="category/category_product.phtml"/>
         </reference>
-        <reference name="left">
+        <!-- <reference name="left">
             <block type="brand/brand" name="brand_category" template="brand/category.phtml"/>
-        </reference>
-    </brand_view_index>
+        </reference> -->
+    </catalog_category_view>
 </layout>
