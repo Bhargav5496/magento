@@ -5,24 +5,36 @@ class Ccc_Category_Block_Adminhtml_Category_Edit extends Mage_Adminhtml_Block_Wi
     public function __construct()
 
     {
-        parent::__construct();
         $this->_objectId = 'category_id';
         $this->_blockGroup = 'category';
         $this->_controller = 'adminhtml_category';
 
+        parent::__construct();
+        
         $this->_updateButton('save', 'label', Mage::helper('category')->__('Save'));
-        $this->_updateButton('delete', 'label', Mage::helper('category')->__('Delete'));
+        $this->_addButton('delete', array(
+            'label'   => Mage::helper('adminhtml')->__('Delete'),
+            'onclick' => "deleteConfirm('" . Mage::helper('adminhtml')->__('Are you sure you want to delete this item?') . "', '" . $this->getDeleteUrl() . "')",
+            'class'   => 'delete',
+        ));
 
-        $this->_addButton('saveandcontinue', array(
-        'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
-        'onclick' => 'saveAndContinueEdit()',
-        'class' => 'save',
-        ), -100);
+        $this->_removeButton('saveandcontinue');    
+        $this->_removeButton('reset');    
     }
 
     public function getHeaderText()
     {
-        return Mage::helper('category')->__('Edit category');
+        if (Mage::registry('category_data')->getId()) {
+            return Mage::helper('category')->__("Edit Category");
+        }
+        else {
+            return Mage::helper('category')->__('New Category');
+        }
+    }
+
+    public function getDeleteUrl()
+    {
+        return $this->getUrl('*/*/delete', array('id' => $this->getRequest()->getParam('id')));
     }
 
 }

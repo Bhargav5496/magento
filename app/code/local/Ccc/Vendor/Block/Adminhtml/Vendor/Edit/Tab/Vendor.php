@@ -8,15 +8,9 @@ class Ccc_Vendor_Block_Adminhtml_Vendor_Edit_Tab_Vendor extends Mage_Adminhtml_B
         $form = new Varien_Data_Form();
         $fieldset = $form->addFieldset('vendor_form',array('legend'=>Mage::helper('vendor')->__('Vendor information')));
 
-        $fieldset->addField('first_name', 'text', array(
-            'name'      => 'vendor[first_name]',
-            'label'     => Mage::helper('vendor')->__('First Name'),
-            'required'  => true,
-        ));
-
-        $fieldset->addField('last_name', 'text', array(
-            'name'      => 'vendor[last_name]',
-            'label'     => Mage::helper('vendor')->__('Last Name'),
+        $fieldset->addField('name', 'text', array(
+            'name'      => 'vendor[name]',
+            'label'     => Mage::helper('vendor')->__('Name'),
             'required'  => true,
         ));
 
@@ -26,16 +20,12 @@ class Ccc_Vendor_Block_Adminhtml_Vendor_Edit_Tab_Vendor extends Mage_Adminhtml_B
             'required'  => true,
         ));
 
-        $fieldset->addField('gender', 'select', array(
-            'label'     => Mage::helper('vendor')->__('Gender'),
-            'title'     => Mage::helper('vendor')->__('Gender'),
-            'name'      => 'vendor[gender]',
+        $fieldset->addField('password', 'password', array(
+            'name'      => 'vendor[password]',
+            'label'     => Mage::helper('vendor')->__('Password'),
             'required'  => true,
-            'options'   => array(
-                '1' => Mage::helper('vendor')->__('Male'),
-                '2' => Mage::helper('vendor')->__('Female'),
-            ),
         ));
+
 
         $fieldset->addField('mobile', 'text', array(
             'name'      => 'vendor[mobile]',
@@ -50,14 +40,8 @@ class Ccc_Vendor_Block_Adminhtml_Vendor_Edit_Tab_Vendor extends Mage_Adminhtml_B
             'required'  => true,
             'options'   => array(
                 '1' => Mage::helper('vendor')->__('Active'),
-                '2' => Mage::helper('vendor')->__('Inactive'),
+                '2' => Mage::helper('vendor')->__('Not Active'),
             ),
-        ));
-
-        $fieldset->addField('company', 'text', array(
-            'name'      => 'vendor[company]',
-            'label'     => Mage::helper('vendor')->__('Company'),
-            'required'  => true,
         ));
 
         $this->setForm($form);

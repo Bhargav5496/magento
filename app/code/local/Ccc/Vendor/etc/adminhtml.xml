@@ -2,12 +2,16 @@
 <config>
    <menu>
         <vendor translate="title" module="vendor">
-            <title>Vendors</title>
+            <title>Vendor</title>
             <sort_order>10</sort_order>
             <children>
                 <manage translate="title" module="vendor">
                     <title>Manage Vendors</title>
+<<<<<<< HEAD
                     <action>vendor/adminhtml_vendor/index</action>
+=======
+                    <action>vendor/adminhtml_vendor/</action>
+>>>>>>> main
                     <sort_order>0</sort_order>
                 </manage>
             </children>

@@ -1,10 +1,11 @@
 <config>
     <modules>
         <Ccc_Vendor>
-            <version>0.2.0</version>                
+            <version>1.0.0</version>                
         </Ccc_Vendor>
     </modules>
     <global>
+<<<<<<< HEAD
         <events>
             <vendor_save>
                 <observers>
@@ -16,6 +17,8 @@
                 </observers>
           </vendor_save>
         </events>
+=======
+>>>>>>> main
         <resources>
             <vendor_setup>
                 <setup>
@@ -82,6 +85,7 @@
         <routers>
             <vendor>
                 <use>admin</use>
+<<<<<<< HEAD
                 <args>
                     <module>Ccc_Vendor</module>
                     <frontName>abc</frontName>
@@ -96,4 +100,13 @@
             </adminhtml> -->
         </routers>
     </admin> 
+=======
+                <args>
+                    <module>Ccc_Vendor</module>
+                    <frontName>vendor</frontName>
+                </args>
+            </vendor>
+        </routers>
+    </admin>
+>>>>>>> main
 </config>

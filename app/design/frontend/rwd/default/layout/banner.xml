@@ -1,0 +1,7 @@
+<layout>
+    <banner_banner_index>
+        <reference name="content">
+            <block type="banner/banner" name="slider" template="banner/slider.phtml"/>
+        </reference>
+    </banner_banner_index>
+</layout>
