@@ -87,13 +87,13 @@
                     <frontName>abc</frontName>
                 </args>
             </vendor>
-            <adminhtml>
+            <!-- <adminhtml>
                 <args>
                     <modules>
                         <ccc_vendor before="Mage_Adminhtml_Catalog">Ccc_Vendor_Adminhtml</ccc_vendor>
                     </modules>
                 </args>
-            </adminhtml>
+            </adminhtml> -->
         </routers>
     </admin> 
 </config>
