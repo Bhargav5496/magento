@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controller_Action
 {
@@ -7,9 +7,7 @@ class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controlle
     {
         $this->loadLayout();
         $this->_setActiveMenu('practice');
-        $this->_title($this->__('Practice'))
-            ->_title($this->__('Manage Practice'));
-
+        $this->_title($this->__('Practice'));
         return $this;
     }
 
@@ -17,7 +15,9 @@ class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controlle
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('One Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_one'));
+            // $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice'));
             $this->renderLayout();
         }catch(Exception $e){
              Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
@@ -27,49 +27,70 @@ class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controlle
     public function oneQueryAction()
     {
         try{
+            echo "<pre>";
             echo "1. Need a list of product with these columns product name, sku, cost, price, color.<br><br>";
 
-            echo "Core Query : <br><br>";
-            $resource = Mage::getSingleton('core/resource');
-            $readConnection = $resource->getConnection('core_read');
+            echo "<b>Core Query</b> : 
 
-            $tableName = $resource->getTableName('catalog/product');
-            echo $select = $readConnection->select()
-                ->from(array('p' => $tableName), array(
-                    'sku' => 'p.sku',
-                    'name' => 'pv.value',
-                    'cost' => 'pdc.value',
-                    'price' => 'pdp.value',
-                    'color' => 'pi.value',
+SELECT cp.entity_id, cpv.value AS name, cp.sku, cpc.value AS cost, cpd.value AS price, 
+(SELECT value FROM eav_attribute_option_value WHERE option_id = cpi.value) as color
+FROM catalog_product_entity AS cp 
+LEFT JOIN catalog_product_entity_varchar AS cpv 
+ON cp.entity_id = cpv.entity_id 
+AND cpv.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'name' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
+LEFT JOIN catalog_product_entity_decimal AS cpd 
+ON cp.entity_id = cpd.entity_id 
+AND cpd.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'price' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
+LEFT JOIN catalog_product_entity_varchar AS cpc 
+ON cp.entity_id = cpc.entity_id 
+AND cpc.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'cost' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
+LEFT JOIN catalog_product_entity_int AS cpi 
+ON cp.entity_id = cpi.entity_id 
+AND cpi.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'color' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
+ORDER BY cp.entity_id;<br><br>";
+
+            echo '<strong>core query in magento syntex: </strong>
+
+            $resource = Mage::getSingleton("core/resource");
+            $readConnection = $resource->getConnection("core_read");
+
+            $tableName = $resource->getTableName("catalog/product");
+            $select = $readConnection->select()
+                ->from(array("p" => $tableName), array(
+                    "sku" => "p.sku",
+                    "name" => "pv.value",
+                    "cost" => "pdc.value",
+                    "price" => "pdp.value",
+                    "color" => "pi.value",
                 ))
                 ->joinLeft(
-                    array('pv' => $resource->getTableName('catalog_product_entity_varchar')),
-                    'pv.entity_id = p.entity_id AND pv.attribute_id = 73',
+                    array("pv" => $resource->getTableName("catalog_product_entity_varchar")),
+                    "pv.entity_id = p.entity_id AND pv.attribute_id = 73",
                     array()
                 )
                 ->joinLeft(
-                    array('pdc' => $resource->getTableName('catalog_product_entity_decimal')),
-                    'pdc.entity_id = p.entity_id AND pdc.attribute_id = 182',
+                    array("pdc" => $resource->getTableName("catalog_product_entity_decimal")),
+                    "pdc.entity_id = p.entity_id AND pdc.attribute_id = 182",
                     array()
                 )
                 ->joinLeft(
-                    array('pdp' => $resource->getTableName('catalog_product_entity_decimal')),
-                    'pdp.entity_id = p.entity_id AND pdp.attribute_id = 77',
+                    array("pdp" => $resource->getTableName("catalog_product_entity_decimal")),
+                    "pdp.entity_id = p.entity_id AND pdp.attribute_id = 77",
                     array()
                 )
                 ->joinLeft(
-                    array('pi' => $resource->getTableName('catalog_product_entity_int')),
-                    'pi.entity_id = p.entity_id AND pi.attribute_id = 94',
+                    array("pi" => $resource->getTableName("catalog_product_entity_int")),
+                    "pi.entity_id = p.entity_id AND pi.attribute_id = 94",
                     array()
-                );
+                )';
 
-            echo "<br><br>Magento Query : <br><br>";
-            print_r('$collection = Mage::getModel("catalog/product")->getCollection();<br>
+            echo "<br><br><b>Magento Query :</b> <br><br>";
+            echo '$collection = Mage::getModel("catalog/product")->getCollection();<br>
         $collection->addAttributeToSelect("name")
             ->addAttributeToSelect("sku")
             ->addAttributeToSelect("cost")
             ->addAttributeToSelect("price")
-            ->addAttributeToSelect("color");');
+            ->addAttributeToSelect("color");';
 
 
         }catch(Exception $e){
@@ -81,6 +102,7 @@ class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controlle
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Two Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_two'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -132,6 +154,7 @@ class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controlle
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Three Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_three'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -203,6 +226,7 @@ class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controlle
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Four Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_four'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -265,6 +289,7 @@ $collection->addAttributeToSelect("entity_id")
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Five Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_five'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -309,6 +334,7 @@ $collection->addAttributeToSelect("entity_id")
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Six Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_six'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -352,6 +378,7 @@ ORDER BY count DESC;<br><br>";
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Seven Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_seven'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -366,11 +393,12 @@ ORDER BY count DESC;<br><br>";
             echo "<pre>";
             echo "7. Need list of top to bottom customers with their total order counts, order status wise. return an array with customer id, customer name, customer email, status, order count.<br><br>";
 
-            echo "Core Query : SELECT c.entity_id, cv.value, c.email, og.status, COUNT(og.entity_id) AS count FROM customer_entity AS c 
-LEFT JOIN customer_entity_varchar as cv ON cv.attribute_id = 5 AND cv.entity_id = c.entity_id
+            echo "Core Query : SELECT c.entity_id, cv.value, c.email, og.status, COUNT(og.entity_id) AS count 
+FROM customer_entity AS c 
+LEFT JOIN customer_entity_varchar as cv ON cv.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'firstname' AND e.entity_type_id = (SELECT et.entity_type_id FROM eav_entity_type AS et WHERE et.entity_type_code = 'catalog_product')) AND cv.entity_id = c.entity_id
 LEFT JOIN sales_flat_order_grid as og ON og.customer_id = c.entity_id
-GROUP BY c.entity_id 
-ORDER BY count DESC;<br><br>";
+GROUP BY c.entity_id
+ORDER BY count DESC;;<br><br>";
 
             echo "Magento Query : <br><br>";
             echo '$collection = Mage::getModel("customer/customer")->getCollection()
@@ -399,6 +427,7 @@ ORDER BY count DESC;<br><br>";
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Eight Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_eight'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -439,6 +468,7 @@ WHERE o.qty_ordered IS NOT NULL;<br><br>";
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Nine Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_nine'));
             $this->renderLayout();
         }catch(Exception $e){
@@ -544,6 +574,7 @@ WHERE
     {
         try{
             $this->_initAction();
+            $this->_title($this->__('Ten Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_ten'));
             $this->renderLayout();
         }catch(Exception $e){

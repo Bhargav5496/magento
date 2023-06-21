@@ -51,8 +51,6 @@ class Ccc_Practice_Block_Adminhtml_Practice_Two extends Mage_Adminhtml_Block_Wid
             'option_id' => 'main_table.option_id',
         ));
 
-
-
         $this->setCollection($attributeOptionCollection);
 
         return parent::_prepareCollection();

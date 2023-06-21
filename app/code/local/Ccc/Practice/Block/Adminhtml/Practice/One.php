@@ -4,8 +4,6 @@ class Ccc_Practice_Block_Adminhtml_Practice_One extends Mage_Adminhtml_Block_Wid
 	public function __construct()
     {
         parent::__construct();
-        // $this->setUseAjax(true);
-        $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
     }
     
