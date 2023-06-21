@@ -1,9 +1,9 @@
 <config>
-    <modules>
+    <!-- <modules>
         <Ccc_Practice>
             <version>1.0.0.0</version>                
         </Ccc_Practice>
-    </modules>
+    </modules> -->
     <frontend>
         <routers>
             <practice>

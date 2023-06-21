@@ -1,15 +1,37 @@
 <?php 
-
-class Ccc_Practice_Block_Adminhtml_One extends Mage_Adminhtml_Block_Widget_Grid
+class Ccc_Practice_Block_Adminhtml_Practice_One extends Mage_Adminhtml_Block_Widget_Grid
 {
 	public function __construct()
     {
         parent::__construct();
-        $this->setUseAjax(true);
+        // $this->setUseAjax(true);
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
     }
-     
+    
+    public function _prepareLayout()
+    {
+        $this->setChild('add_button',
+            $this->getLayout()->createBlock('adminhtml/widget_button')
+                ->setData( array(
+            'label'     => $this->__('Show Query'),
+            'onclick'   => 'setLocation(\'' . $this->getCreateUrl() . '\')',
+            'class'     => 'add_button',
+            ))
+        );
+        return parent::_prepareLayout();
+    }
+
+    public function getCreateUrl()
+    {
+        return $this->getUrl('*/*/oneQuery');
+    }
+
+    public function getMainButtonsHtml()
+    {
+        return $this->getChildHtml('add_button').parent::getMainButtonsHtml();
+    }
+
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('catalog/product')->getCollection();
@@ -55,6 +77,7 @@ class Ccc_Practice_Block_Adminhtml_One extends Mage_Adminhtml_Block_Widget_Grid
         $this->addColumn('color', array(
             'header' => Mage::helper('catalog')->__('Color'),
             'index' => 'color',
+            'renderer' => 'Ccc_Practice_Block_Adminhtml_One_Renderer_Color'
         ));
 
         return parent::_prepareColumns();
