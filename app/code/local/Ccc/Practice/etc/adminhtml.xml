@@ -55,6 +55,11 @@
                     <action>practice/adminhtml_practice/ten</action>
                     <sort_order>9</sort_order>
                 </manage_ten>
+                <manage_ten translate="title" module="practice">
+                    <title>Csv Merge Practice</title>
+                    <action>practice/adminhtml_csv/index</action>
+                    <sort_order>10</sort_order>
+                </manage_ten>
             </children>
         </practice>
     </menu>
