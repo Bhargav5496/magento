@@ -4,25 +4,18 @@
             <version>1.0.0</version>                
         </Ccc_Vendor>
     </modules>
-    <frontend>
-        <routers>
-            <vendor>
-                <use>standard</use>
-                <args>
-                    <module>Ccc_Vendor</module>
-                    <frontName>vendor</frontName>
-                </args>
-            </vendor>
-        </routers>
-        <layout>
-            <updates>
-                <vendor>
-                    <file>vendor.xml</file>
-                </vendor>
-            </updates>
-        </layout>
-    </frontend>
     <global>
+        <events>
+            <vendor_save>
+                <observers>
+                    <vendor_observer>
+                        <type>singleton</type>
+                        <class>Ccc_Vendor_Model_Observer</class>
+                        <method>saveVendorObserver</method>
+                    </vendor_observer>
+                </observers>
+          </vendor_save>
+        </events>
         <resources>
             <vendor_setup>
                 <setup>
@@ -63,19 +56,46 @@
         <blocks>
             <vendor>
                 <class>Ccc_Vendor_Block</class>
+                <!-- <rewrite>
+                    <adminhtml_vendor>Ccc_Product_Block_Adminhtml_Product</adminhtml_vendor>
+                </rewrite> -->
             </vendor>
+            <!-- <adminhtml>
+                <rewrite>
+                    <catalog_product_grid>Ccc_Vendor_Block_Adminhtml_Catalog_Product_Grid</catalog_product_grid>
+                </rewrite>
+            </adminhtml> -->
         </blocks>
+
         <helpers>
             <vendor>
                 <class>Ccc_Vendor_Helper</class>
             </vendor>
+            <!-- <vendor>
+                <rewrite>
+                    <data>Ccc_ Vendor_Helper_NewData</data>
+                </rewrite>
+            </vendor> -->
         </helpers>
-        
     </global>
     <admin>
         <routers>
             <vendor>
                 <use>admin</use>
+                <args>
+                    <module>Ccc_Vendor</module>
+                    <frontName>abc</frontName>
+                </args>
+            </vendor>
+            <!-- <adminhtml>
+                <args>
+                    <modules>
+                        <ccc_vendor before="Mage_Adminhtml_Catalog">Ccc_Vendor_Adminhtml</ccc_vendor>
+                    </modules>
+                </args>
+            </adminhtml> -->
+        </routers>
+            </admin> 
                 <args>
                     <module>Ccc_Vendor</module>
                     <frontName>vendor</frontName>

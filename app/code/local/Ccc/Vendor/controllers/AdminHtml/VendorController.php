@@ -15,6 +15,7 @@ class Ccc_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Ac
 
     public function indexAction()
     {
+
         $this->loadLayout();
         $this->_setActiveMenu('vendor');
         $this->_title($this->__("Vendor Grid"));
@@ -123,6 +124,8 @@ class Ccc_Vendor_Adminhtml_VendorController extends Mage_Adminhtml_Controller_Ac
             $addressModel = Mage::getModel('vendor/vendor_address');
             $model->setData($vendor)->setId($this->getRequest()->getParam('id'));
             
+            Mage::dispatchEvent('vendor_save', array('model' => $model, 'request' => $this->getRequest()));
+
 
             $addressModel->setData($address);
             try {

@@ -7,7 +7,11 @@
             <children>
                 <manage translate="title" module="vendor">
                     <title>Manage Vendors</title>
+<<<<<<< HEAD
+                    <action>vendor/adminhtml_vendor/index</action>
+=======
                     <action>vendor/adminhtml_vendor/</action>
+>>>>>>> main
                     <sort_order>0</sort_order>
                 </manage>
             </children>

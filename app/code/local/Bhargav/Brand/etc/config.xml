@@ -66,6 +66,9 @@
             <brand>
                 <class>Bhargav_Brand_Helper</class>
             </brand>
+            <bhargav>
+                <class>Bhargav_Brand_Helper</class>
+            </bhargav>
         </helpers>
     </global>
     <admin>
