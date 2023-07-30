@@ -11,7 +11,6 @@ class Ccc_Vendor_Block_Adminhtml_Vendor_Grid extends Mage_Adminhtml_Block_Widget
         $this->setUseAjax(true);
         $this->setDefaultDir('DESC');
         $this->setSaveParametersInSession(true);
-
     }
 
     protected function _getCollectionClass()

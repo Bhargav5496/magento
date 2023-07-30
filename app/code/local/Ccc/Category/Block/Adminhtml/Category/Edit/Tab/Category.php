@@ -4,29 +4,39 @@ class Ccc_Category_Block_Adminhtml_Category_Edit_Tab_Category extends Mage_Admin
 {
     protected function _prepareForm()
     {
-        $model = Mage::registry('category_data');
-        $form = new Varien_Data_Form();
+        $model = Mage::registry('model_data');
+        $form  = new Varien_Data_Form();
 
-        $fieldset = $form->addFieldset('category_form',array('legend'=>Mage::helper('category')->__('Category Information')));
-        
+        $fieldset = $form->addFieldset('category_form', array('legend' => Mage::helper('category')->__('Category Information')));
+
         $fieldset->addField('name', 'text', array(
-            'name'      => 'category[name]',
-            'label'     => Mage::helper('category')->__('Name'),
-            'required'  => true,
+            'label'              => Mage::helper('category')->__('Name'),
+            // 'class'              => 'required-entry',
+            'required'           => false,
+            'name'               => 'name',
+            // 'onclick'            => "alert('on click');",
+            // 'onchange'           => "alert('on change');",
+            // 'style'              => "border:10px",
+            'disabled'           => false,
+            // 'readonly'           => false,
+            'after_element_html' => 'Enter the name of category',
         ));
-
 
         $fieldset->addField('status', 'select', array(
-            'label'     => Mage::helper('category')->__('Status'),
-            'title'     => Mage::helper('category')->__('Status'),
-            'name'      => 'category[status]',
-            'required'  => true,
-            'options'   => array(
-                '1' => Mage::helper('category')->__('Active'),
-                '2' => Mage::helper('category')->__('Inactive'),
-            ),
+            'label'              => Mage::helper('category')->__('Status'),
+            // 'class'              => 'required-entry',
+            'required'           => false,
+            'name'               => 'status',
+            'onclick'            => "",
+            'onchange'           => "",
+            'values'             => array('1' => 'Active', '0' => 'Inactive'),
+            'value'              => '0',
+            'disabled'           => false,
+            'readonly'           => false,
+            'after_element_html' => 'Select the status',
+            'tabindex'           => 1,
         ));
-        
+
         $this->setForm($form);
         $form->setValues($model->getData());
 

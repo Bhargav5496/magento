@@ -55,11 +55,21 @@
                     <action>practice/adminhtml_practice/ten</action>
                     <sort_order>9</sort_order>
                 </manage_ten>
-                <manage_ten translate="title" module="practice">
-                    <title>Csv Merge Practice</title>
-                    <action>practice/adminhtml_csv/index</action>
+                <manage_csv_one translate="title" module="practice">
+                    <title>Merge csv using normal way</title>
+                    <action>practice/adminhtml_csv/one</action>
                     <sort_order>10</sort_order>
-                </manage_ten>
+                </manage_csv_one>
+                <manage_csv_two translate="title" module="practice">
+                    <title>Merge csv using magento way</title>
+                    <action>practice/adminhtml_csv/two</action>
+                    <sort_order>11</sort_order>
+                </manage_csv_two>
+                <manage_csv_third translate="title" module="practice">
+                    <title>Export Csv Using Fields Defined in Xml</title>
+                    <action>practice/adminhtml_csv/exportCsvUsingXml</action>
+                    <sort_order>11</sort_order>
+                </manage_csv_third>
             </children>
         </practice>
     </menu>
@@ -72,55 +82,57 @@
                         <sort_order>40</sort_order>
                         <children>
                             <manage_one translate="title" module="practice">
-                                <title>One</title>
                                 <action>practice/adminhtml_practice/one</action>
                                 <sort_order>10</sort_order>
                             </manage_one>
                             <manage_two translate="title" module="practice">
-                                <title>Two</title>
                                 <action>practice/adminhtml_practice/two</action>
                                 <sort_order>20</sort_order>
                             </manage_two>
                             <manage_three translate="title" module="practice">
-                                <title>Three</title>
                                 <action>practice/adminhtml_practice/three</action>
                                 <sort_order>20</sort_order>
                             </manage_three>
                             <manage_four translate="title" module="practice">
-                                <title>Four</title>
                                 <action>practice/adminhtml_practice/four</action>
                                 <sort_order>20</sort_order>
                             </manage_four>
                             <manage_five translate="title" module="practice">
-                                <title>Four</title>
                                 <action>practice/adminhtml_practice/five</action>
                                 <sort_order>20</sort_order>
                             </manage_five>
                             <manage_six translate="title" module="practice">
-                                <title>Four</title>
                                 <action>practice/adminhtml_practice/six</action>
                                 <sort_order>20</sort_order>
                             </manage_six>
                             <manage_seven translate="title" module="practice">
-                                <title>Four</title>
                                 <action>practice/adminhtml_practice/seven</action>
                                 <sort_order>20</sort_order>
                             </manage_seven>
                             <manage_eight translate="title" module="practice">
-                                <title>Four</title>
                                 <action>practice/adminhtml_practice/eight</action>
                                 <sort_order>20</sort_order>
                             </manage_eight>
                             <manage_nine translate="title" module="practice">
-                                <title>Four</title>
                                 <action>practice/adminhtml_practice/nine</action>
                                 <sort_order>20</sort_order>
                             </manage_nine>
                             <manage_ten translate="title" module="practice">
-                                <title>Four</title>
                                 <action>practice/adminhtml_practice/ten</action>
                                 <sort_order>20</sort_order>
                             </manage_ten>
+                            <manage_csv_one translate="title" module="practice">
+                                <action>practice/adminhtml_csv/one</action>
+                                <sort_order>20</sort_order>
+                            </manage_csv_one>
+                            <manage_csv_two translate="title" module="practice">
+                                <action>practice/adminhtml_csv/two</action>
+                                <sort_order>20</sort_order>
+                            </manage_csv_two>
+                            <manage_csv_third translate="title" module="practice">
+                                <action>practice/adminhtml_csv/exportCsvUsingXml</action>
+                                <sort_order>20</sort_order>
+                            </manage_csv_third>
                         </children>
                     </practice>
                 </children>

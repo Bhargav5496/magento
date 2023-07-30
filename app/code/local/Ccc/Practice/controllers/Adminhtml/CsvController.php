@@ -1,14 +1,14 @@
+
 <?php
 
 class Ccc_Practice_Adminhtml_CsvController extends Mage_Adminhtml_Controller_Action
 {
-    public function indexAction()
+    public function oneAction()
     {
-        $categoryCsvFilePath = "C:\Users\gohel\Downloads\CATEGORY.csv";
+        $categoryCsvFilePath        = "C:\Users\gohel\Downloads\CATEGORY.csv";
         $attributeOptionCsvFilePath = "C:\Users\gohel\Downloads\ATTRIBUTE-OPTIONS.csv";
-        $finalCsvFilePath = 'category-attribute-option.csv';
+        $finalCsvFilePath           = 'category-attribute-option.csv';
 
-        
         // Open the final CSV file for writing
         $finalCsvFile = fopen($finalCsvFilePath, 'w');
 
@@ -18,15 +18,15 @@ class Ccc_Practice_Adminhtml_CsvController extends Mage_Adminhtml_Controller_Act
 
         // Load the category data from the category.csv file and remove duplicate categories
         $categoryCsvData = array_map('str_getcsv', file($categoryCsvFilePath));
-        if(!$categoryCsvData){
+        if (!$categoryCsvData) {
             throw new Exception("Unable to find the categoryCsv file", 1);
         }
-        $categoryData = array_unique(array_column($categoryCsvData, 1)); // Get unique category names
-        $categoryData = array_values($categoryData); // Reindex the array
+        $categoryData    = array_unique(array_column($categoryCsvData, 1)); // Get unique category names
+        $categoryData    = array_values($categoryData); // Reindex the array
         $categoryHeaders = array_shift($categoryData); // Remove the header row
         // Load the attribute-option data from the attribute-option.csv file and remove duplicates
         $attributeOptionData = array_map('str_getcsv', file($attributeOptionCsvFilePath));
-        if(!$attributeOptionData){
+        if (!$attributeOptionData) {
             throw new Exception("Unable to find the attributeOption file", 1);
         }
         $attributeOptionData = array_unique($attributeOptionData, SORT_REGULAR);
@@ -50,7 +50,7 @@ class Ccc_Practice_Adminhtml_CsvController extends Mage_Adminhtml_Controller_Act
             // Iterate through each attribute-option mapping
             foreach ($attributeOptionData as $attributeOptionRow) {
                 $attributeId = $attributeOptionRow[0];
-                $option = $attributeOptionRow[1];
+                $option      = $attributeOptionRow[1];
 
                 // Generate a unique key for the attribute-option combination
                 $combinationKey = $attributeId . '_' . $option;
@@ -59,7 +59,6 @@ class Ccc_Practice_Adminhtml_CsvController extends Mage_Adminhtml_Controller_Act
                 if (!isset($writtenCombinations[$combinationKey])) {
                     // Write the category, attribute, and option to the final CSV file
                     $row = [$categoryId, $categoryName, $attributeId, $option];
-
 
                     fputcsv($finalCsvFile, $row);
 
@@ -74,4 +73,30 @@ class Ccc_Practice_Adminhtml_CsvController extends Mage_Adminhtml_Controller_Act
         // Set the file download headers
         $this->_prepareDownloadResponse('category-attribute-option.csv', file_get_contents($finalCsvFilePath));
     }
+
+    public function twoAction()
+    {
+        $csvMergeObj = Mage::getModel('practice/csvmerge');
+
+        $csvMergeObj->setCategoryFile('C:\Users\gohel\Downloads\CATEGORY.csv');
+        $csvMergeObj->setOptionFile('C:\Users\gohel\Downloads\ATTRIBUTE-OPTIONS.csv');
+        $csvMergeObj->setFinalFile('C:\Users\gohel\Downloads\category-attribute-option.csv');
+
+        $file = $csvMergeObj->run();
+
+        $this->_prepareDownloadResponse('category-attribute-option.csv', file_get_contents($file));
+    }
+
+    public function exportCsvUsingXmlAction()
+    {
+        $helper = Mage::helper('practice');
+        if ($helper->generateDataMethod2()) {
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('brand')->__('csv was successfully saved'));
+        } else {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        }
+        $this->_redirect('*/adminhtml_practice/one');
+        return;
+    }
+
 }
