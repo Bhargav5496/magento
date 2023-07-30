@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ccc_UserAttributeLog>
+            <version>1.0.0</version>
+        </Ccc_UserAttributeLog>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Ccc_UserAttributeLog before="Mage_Adminhtml">Ccc_UserAttributeLog_Adminhtml</Ccc_UserAttributeLog>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <global>
+        <blocks>
+            <userattributelog>
+                <class>Ccc_UserAttributeLog_Block</class>
+            </userattributelog>
+        </blocks>
+        <helpers>
+            <userattributelog>
+                <class>Ccc_UserAttributeLog_Helper</class>
+            </userattributelog>
+        </helpers>
+    </global>
+</config>

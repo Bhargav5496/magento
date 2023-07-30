@@ -13,39 +13,40 @@ class Ccc_Practice_Adminhtml_PracticeController extends Mage_Adminhtml_Controlle
 
     public function oneAction()
     {
-        try{
+        try {
+
             $this->_initAction();
             $this->_title($this->__('One Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_one'));
             // $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function oneQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "1. Need a list of product with these columns product name, sku, cost, price, color.<br><br>";
 
-            echo "<b>Core Query</b> : 
+            echo "<b>Core Query</b> :
 
-SELECT cp.entity_id, cpv.value AS name, cp.sku, cpc.value AS cost, cpd.value AS price, 
+SELECT cp.entity_id, cpv.value AS name, cp.sku, cpc.value AS cost, cpd.value AS price,
 (SELECT value FROM eav_attribute_option_value WHERE option_id = cpi.value) as color
-FROM catalog_product_entity AS cp 
-LEFT JOIN catalog_product_entity_varchar AS cpv 
-ON cp.entity_id = cpv.entity_id 
+FROM catalog_product_entity AS cp
+LEFT JOIN catalog_product_entity_varchar AS cpv
+ON cp.entity_id = cpv.entity_id
 AND cpv.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'name' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
-LEFT JOIN catalog_product_entity_decimal AS cpd 
-ON cp.entity_id = cpd.entity_id 
+LEFT JOIN catalog_product_entity_decimal AS cpd
+ON cp.entity_id = cpd.entity_id
 AND cpd.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'price' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
-LEFT JOIN catalog_product_entity_varchar AS cpc 
-ON cp.entity_id = cpc.entity_id 
+LEFT JOIN catalog_product_entity_varchar AS cpc
+ON cp.entity_id = cpc.entity_id
 AND cpc.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'cost' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
-LEFT JOIN catalog_product_entity_int AS cpi 
-ON cp.entity_id = cpi.entity_id 
+LEFT JOIN catalog_product_entity_int AS cpi
+ON cp.entity_id = cpi.entity_id
 AND cpi.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'color' AND e.entity_type_id = (SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'))
 ORDER BY cp.entity_id;<br><br>";
 
@@ -92,32 +93,34 @@ ORDER BY cp.entity_id;<br><br>";
             ->addAttributeToSelect("price")
             ->addAttributeToSelect("color");';
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function twoAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Two Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_two'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
-
     public function twoQueryAction()
     {
-        try{
+        try {
             echo "2. Need a list of attribute & options. return an array with attribute id, attribute code, option Id, option name.<br><br>";
 
             echo "Core Query : <br><br>";
-            echo "SELECT a.attribute_id, a.attribute_code, ao.option_id, aov.value FROM eav_attribute AS a LEFT JOIN eav_attribute_option AS ao ON a.attribute_id = ao.attribute_id LEFT JOIN eav_attribute_option_value AS aov ON ao.option_id = aov.option_id WHERE a.entity_type_id = ( SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product' ) AND ao.option_id IS NOT NUll";
+            echo "SELECT a.attribute_id, a.attribute_code, ao.option_id, aov.value
+FROM eav_attribute AS a
+LEFT JOIN eav_attribute_option AS ao ON a.attribute_id = ao.attribute_id
+LEFT JOIN eav_attribute_option_value AS aov ON ao.option_id = aov.option_id
+WHERE a.frontend_input = 'select' AND a.is_user_defined = 1;";
 
             echo "<br><br>Magento Query : <br><br>";
             print_r('$attributeCollection = Mage::getResourceModel("eav/entity_attribute_collection");
@@ -144,59 +147,57 @@ ORDER BY cp.entity_id;<br><br>";
             "option_id" => "main_table.option_id",
         ));');
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function threeAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Three Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_three'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
-
     public function threeQueryAction()
     {
-        try{
+        try {
             echo "3. Need a list of attribute having options count greater than 10. return array with attribute id, attribute code, option count. make query based on magento syntex wise and core query<br><br>";
 
             echo "Core Query : <br><br>";
 
-            $resource = Mage::getSingleton('core/resource');
-        $readConnection = $resource->getConnection('core_read');
+            $resource       = Mage::getSingleton('core/resource');
+            $readConnection = $resource->getConnection('core_read');
 
-        $subquery = $readConnection->select()
-            ->from(
-                array('opt' => $resource->getTableName('eav/attribute_option')),
-                array('attribute_id', 'option_count' => new Zend_Db_Expr('COUNT(opt.option_id)'))
-            )
-            ->group('opt.attribute_id')
-            ->having('option_count > ?', 10);
+            $subquery = $readConnection->select()
+                ->from(
+                    array('opt' => $resource->getTableName('eav/attribute_option')),
+                    array('attribute_id', 'option_count' => new Zend_Db_Expr('COUNT(opt.option_id)'))
+                )
+                ->group('opt.attribute_id')
+                ->having('option_count > ?', 10);
 
             $query = $readConnection->select()
-            ->from(
-                array('main_table' => $resource->getTableName('eav/entity_attribute')),
-                array('attribute_id')
-            )
-            ->join(
-                array('attr' => $resource->getTableName('eav/attribute')),
-                'attr.attribute_id = main_table.attribute_id',
-                array('attribute_code')
-            )
-            ->joinLeft(
-                array('sub' => new Zend_Db_Expr('(' . $subquery . ')')),
-                'sub.attribute_id = main_table.attribute_id',
-                array('option_count' => 'sub.option_count')
-            )
-            ->where('sub.option_count > 10');
+                ->from(
+                    array('main_table' => $resource->getTableName('eav/entity_attribute')),
+                    array('attribute_id')
+                )
+                ->join(
+                    array('attr' => $resource->getTableName('eav/attribute')),
+                    'attr.attribute_id = main_table.attribute_id',
+                    array('attribute_code')
+                )
+                ->joinLeft(
+                    array('sub' => new Zend_Db_Expr('(' . $subquery . ')')),
+                    'sub.attribute_id = main_table.attribute_id',
+                    array('option_count' => 'sub.option_count')
+                )
+                ->where('sub.option_count > 10');
 
             echo $query->__toString();
 
@@ -216,52 +217,50 @@ ORDER BY cp.entity_id;<br><br>";
             $resultCollection = Mage::getModel("eav/entity_attribute")->getCollection();<br>
             $resultCollection->getSelect()->reset()->from(array("main_table" => $attributeOptionCollection));');
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function fourAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Four Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_four'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
-
     public function fourQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "4. Need list of product with assigned images. return an array with product Id, sku, base image, thumb image, small image.<br><br>";
 
-            echo "Core Query : SELECT 
+            echo "Core Query : SELECT
                 p.entity_id AS product_id,
                 p.sku,
                 i1.value AS base_image,
                 i2.value AS thumb_image,
                 i3.value AS small_image
-            FROM 
+            FROM
                 catalog_product_entity AS p
-            LEFT JOIN 
+            LEFT JOIN
                 catalog_product_entity_varchar AS i1 ON (p.entity_id = i1.entity_id AND i1.attribute_id = (
                     SELECT attribute_id FROM eav_attribute WHERE attribute_code = 'image' AND entity_type_id = (
                         SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'
                     )
                 ))
-            LEFT JOIN 
+            LEFT JOIN
                 catalog_product_entity_varchar AS i2 ON (p.entity_id = i2.entity_id AND i2.attribute_id = (
                     SELECT attribute_id FROM eav_attribute WHERE attribute_code = 'thumbnail' AND entity_type_id = (
                         SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'
                     )
                 ))
-            LEFT JOIN 
+            LEFT JOIN
                 catalog_product_entity_varchar AS i3 ON (p.entity_id = i3.entity_id AND i3.attribute_id = (
                     SELECT attribute_id FROM eav_attribute WHERE attribute_code = 'small_image' AND entity_type_id = (
                         SELECT entity_type_id FROM eav_entity_type WHERE entity_type_code = 'catalog_product'
@@ -279,31 +278,30 @@ $collection->addAttributeToSelect("entity_id")
     ->addAttributeToFilter("image", array("notnull" => true));
             ';
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function fiveAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Five Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_five'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function fiveQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "5. Need list of product with gallery image count. return an array with product sku, gallery images count, without consideration of thumb, small, base.<br><br>";
 
-            echo "Core Query : SELECT 
+            echo "Core Query : SELECT
                 e.sku AS product_sku,
                 COUNT(g.value_id) AS gallery_image_count
             FROM
@@ -325,34 +323,32 @@ $collection->addAttributeToSelect("entity_id")
         ->group("e.entity_id");
         $collection->addAttributeToSelect("sku");';
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
     public function sixAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Six Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_six'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
-
     public function sixQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "6. Need list of top to bottom customers with their total order counts. return an array with customer id, customer name, customer email, order count.<br><br>";
 
-            echo "Core Query : SELECT c.entity_id, c.email, cv.value, COUNT(og.entity_id) AS count FROM customer_entity AS c 
+            echo "Core Query : SELECT c.entity_id, c.email, cv.value, COUNT(og.entity_id) AS count FROM customer_entity AS c
 LEFT JOIN customer_entity_varchar as cv ON cv.attribute_id = 5 AND cv.entity_id = c.entity_id
 LEFT JOIN sales_flat_order_grid as og ON og.customer_id = c.entity_id
-GROUP BY c.entity_id 
+GROUP BY c.entity_id
 ORDER BY count DESC;<br><br>";
 
             echo "Magento Query : <br><br>";
@@ -369,32 +365,30 @@ ORDER BY count DESC;<br><br>";
         $collection->addAttributeToSelect("firstname");
         $collection->addAttributeToSelect("email");';
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
     public function sevenAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Seven Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_seven'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
-
     public function sevenQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "7. Need list of top to bottom customers with their total order counts, order status wise. return an array with customer id, customer name, customer email, status, order count.<br><br>";
 
-            echo "Core Query : SELECT c.entity_id, cv.value, c.email, og.status, COUNT(og.entity_id) AS count 
-FROM customer_entity AS c 
+            echo "Core Query : SELECT c.entity_id, cv.value, c.email, og.status, COUNT(og.entity_id) AS count
+FROM customer_entity AS c
 LEFT JOIN customer_entity_varchar as cv ON cv.attribute_id = (SELECT e.attribute_id FROM eav_attribute AS e WHERE e.attribute_code = 'firstname' AND e.entity_type_id = (SELECT et.entity_type_id FROM eav_entity_type AS et WHERE et.entity_type_code = 'catalog_product')) AND cv.entity_id = c.entity_id
 LEFT JOIN sales_flat_order_grid as og ON og.customer_id = c.entity_id
 GROUP BY c.entity_id
@@ -418,33 +412,32 @@ ORDER BY count DESC;;<br><br>";
             ->group("e.entity_id")
             ->order("count DESC");';
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
     public function eightAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Eight Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_eight'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function eightQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "8. Need list product with number of quantity sold till now for each. return an array with product id, sku, sold quantity.<br><br>";
 
             echo "Core Query : <br><br>";
-            echo " SELECT p.entity_id, p.sku, o.qty_ordered 
+            echo " SELECT p.entity_id, p.sku, o.qty_ordered
 FROM `catalog_product_entity` as p
-LEFT JOIN sales_flat_order_item as o on o.product_id = p.entity_id 
+LEFT JOIN sales_flat_order_item as o on o.product_id = p.entity_id
 WHERE o.qty_ordered IS NOT NULL;<br><br>";
 
             echo "Magento Query : <br><br>";
@@ -457,28 +450,26 @@ WHERE o.qty_ordered IS NOT NULL;<br><br>";
 
         $this->setCollection($collection);';
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
-
     public function nineAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Nine Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_nine'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function nineQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "9. Need list of those attributes for whose value is not assigned to product. return an array result product wise with these columns product Id, sku, attribute Id, attribute code<br><br>";
 
@@ -564,27 +555,26 @@ WHERE
             $item = new Varien_Object($data);
             $collection->addItem($item);
         }';
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
-
     public function tenAction()
     {
-        try{
+        try {
             $this->_initAction();
             $this->_title($this->__('Ten Query'));
             $this->_addContent($this->getLayout()->createBlock('practice/adminhtml_practice_ten'));
             $this->renderLayout();
-        }catch(Exception $e){
-             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }
 
     public function tenQueryAction()
     {
-        try{
+        try {
             echo "<pre>";
             echo "10. Need list of those attributes for whose value is assigned to product. return an array result product wise with these columns product Id, sku, attribute Id, attribute code, value.<br><br>";
 
@@ -654,8 +644,7 @@ WHERE
         }
 ';
 
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
     }

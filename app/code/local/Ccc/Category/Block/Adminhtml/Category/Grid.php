@@ -1,11 +1,11 @@
 <?php
- 
+
 class Ccc_Category_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
     public function __construct()
     {
         parent::__construct();
-         
+
         $this->setDefaultSort('category_id');
         $this->setId('cdminhtmlCategoryGrid');
         $this->setUseAjax(true);
@@ -18,7 +18,7 @@ class Ccc_Category_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Wi
     {
         $collection = Mage::getModel('category/category')->getCollection();
         $this->setCollection($collection);
-         
+
         return parent::_prepareCollection();
     }
 
@@ -26,37 +26,37 @@ class Ccc_Category_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Wi
     {
         $this->addColumn('category_id',
             array(
-                'header'=> $this->__('Category Id'),
-                'align' =>'right',
-                'index' => 'category_id'
-            )
-        );
-         
-        $this->addColumn('name',
-            array(
-                'header'=> $this->__('Name'),
-                'index' => 'name'
-            )
-        );
-          
-        $this->addColumn('status',
-            array(
-                'header'=> $this->__('Status'),
-                'index' => 'status'
+                'header' => $this->__('Category Id'),
+                'align'  => 'right',
+                'index'  => 'category_id',
             )
         );
 
+        $this->addColumn('name',
+            array(
+                'header' => $this->__('Name'),
+                'index'  => 'name',
+            )
+        );
+
+        $this->addColumn('status', array(
+            'header'   => $this->__('Status'),
+            'index'    => 'status',
+            'renderer' => 'Ccc_Category_Block_Adminhtml_Category_Renderer_Status', // Correct renderer block name
+        ));
+
+
         $this->addColumn('created_at',
             array(
-                'header'=> $this->__('Created At'),
-                'index' => 'created_at'
+                'header' => $this->__('Created At'),
+                'index'  => 'created_at',
             )
         );
 
         $this->addColumn('updated_at',
             array(
-                'header'=> $this->__('Updated At'),
-                'index' => 'updated_at'
+                'header' => $this->__('Updated At'),
+                'index'  => 'updated_at',
             )
         );
 
@@ -69,9 +69,9 @@ class Ccc_Category_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Wi
         $this->getMassactionBlock()->setFormFieldName('category_id');
 
         $this->getMassactionBlock()->addItem('delete', array(
-             'label'    => Mage::helper('category')->__('Delete'),
-             'url'      => $this->getUrl('*/*/massDelete'),
-             'confirm'  => Mage::helper('category')->__('Are you sure?')
+            'label'   => Mage::helper('category')->__('Delete'),
+            'url'     => $this->getUrl('*/*/massDelete'),
+            'confirm' => Mage::helper('category')->__('Are you sure?'),
         ));
 
         return $this;
@@ -79,6 +79,6 @@ class Ccc_Category_Block_Adminhtml_Category_Grid extends Mage_Adminhtml_Block_Wi
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('id'=>$row->getId()));
+        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
     }
 }

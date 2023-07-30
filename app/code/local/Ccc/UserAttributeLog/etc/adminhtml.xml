@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <userattributelog module="userattributelog">
+                    <title>User Attribute Modification Log</title>
+                    <action>adminhtml/log/</action>
+                    <sort_order>1100</sort_order>
+                </userattributelog>
+            </children>
+        </catalog>
+    </menu>
+</config>

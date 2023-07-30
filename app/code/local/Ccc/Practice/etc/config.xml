@@ -1,9 +1,9 @@
 <config>
-    <!-- <modules>
+    <modules>
         <Ccc_Practice>
-            <version>1.0.0.0</version>                
+            <version>0.2.0</version>                
         </Ccc_Practice>
-    </modules> -->
+    </modules>
     <frontend>
         <routers>
             <practice>
@@ -15,6 +15,22 @@
             </practice>
         </routers>
     </frontend>
+    <export_ccc>
+        <columns>
+            <sku>SKU</sku>
+            <type_id>Type Id</type_id>
+        </columns>
+        <filters>
+            <sku>
+                <operator>neq</operator>
+                <value>product1</value>
+            </sku>
+            <type_id>
+                <operator>eq</operator>
+                <value>simple</value>
+            </type_id>
+        </filters>
+    </export_ccc>
     <global>
         <models>
             <practice>
@@ -30,6 +46,16 @@
                 </entities>
             </practice_resource>
         </models>
+        <resources>
+            <practice_setup>
+                <setup>
+                    <module>Ccc_Practice</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </practice_setup>
+        </resources>
         <helpers>
             <practice>
                 <class>Ccc_Practice_Helper</class>

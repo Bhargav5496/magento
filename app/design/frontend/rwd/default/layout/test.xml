@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <remove name="header"/>
+        <remove name="footer"/>
+        <remove name="left"/>
+        <remove name="right"/>            
+    </default>
+    <test_index_index>
+        <reference name="content">
+            <block type="test/view" name="test_view.test" template="test/test.phtml" />
+        </reference>
+    </test_index_index>
+    <test_index_grid>
+        <reference name="content">
+            <block type="test/view" name="test_view.grid" template="test/grid.phtml" />
+        </reference>
+    </test_index_grid>
+</layout>

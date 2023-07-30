@@ -6,6 +6,7 @@ class Ccc_Practice_OneController extends Mage_Core_Controller_Front_Action
     {
         echo "<pre>";
         
+
         $collection = new Ccc_Practice_Model_Resource_Practice_Collection();
         print_r(get_class_methods($controller));
 

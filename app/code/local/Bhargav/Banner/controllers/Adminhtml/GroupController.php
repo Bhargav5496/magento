@@ -1,4 +1,4 @@
-<?php
+ <?php
 class Bhargav_Banner_Adminhtml_GroupController extends Mage_Adminhtml_Controller_Action
 {
     public function indexAction()

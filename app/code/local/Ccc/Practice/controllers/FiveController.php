@@ -11,8 +11,6 @@ class Ccc_Practice_FiveController extends Mage_Core_Controller_Front_Action
         $model = Mage::getModel('practice/practice');
         $collection = $model->getCollection();
 
-        echo $collection->getSelect()->where('vendor_id = 8');
-
         print_r($collection->getItems());        
         print_r($collection->toArray());        
         print_r($collection->getData());
